@@ -1,5 +1,6 @@
 using FoodTeams.Entities;
 using FoodTeams.Interop.TeamsSDK;
+using FoodTeams.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<FoodTeamsDbContext>();
+builder.Services.AddScoped<OrderService>();
 
 
 var app = builder.Build();

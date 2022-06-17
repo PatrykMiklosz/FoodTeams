@@ -7,6 +7,7 @@
 @inject IWebHostEnvironment HostEnvironment
 @inject IConfiguration Configuration
 @inject NavigationManager MyNavigationManager
+@inject NavigationManager UriHelper
 
 @if(isLoading)
 {
@@ -21,7 +22,7 @@ else
             <img src="FOOD.png" />
             <h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px"Appearance="Appearance.Accent">New order</FluentButton></h1>
             <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral">Active orders</FluentButton></p>
-          
+            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral"@onclick="Navigate">Order history</FluentButton></p>
         </div>
     </div>
 }
@@ -58,6 +59,11 @@ else
     private string GetEnvironmentName()
     {
         return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
+    }
+
+      void Navigate()
+    {
+         UriHelper.NavigateTo("orderHistory");
     }
 }
 
