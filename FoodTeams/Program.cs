@@ -1,3 +1,4 @@
+using FoodTeams.Entities;
 using FoodTeams.Interop.TeamsSDK;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddScoped<MicrosoftTeams>();
 builder.Services.AddControllers();
 builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.FromSeconds(600));
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddDbContext<FoodTeamsDbContext>();
+
 
 var app = builder.Build();
 
