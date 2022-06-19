@@ -1,0 +1,68 @@
+﻿@page "/OrderHistory"
+@using FoodTeams.Services
+@inject NavigationManager UriHelper
+@inject OrderService service
+@inject DishService Service
+
+<head>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 20px;
+		}
+
+		th {
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+	<table style="width:100%">
+		<tr>
+			<th>Id</th>
+			<th>Restaurant Name</th>
+			<th>Menu link</th>
+			<th>Minimal price</th>
+			<th>Delivery price</th>
+			<th>Free delivery price</th>
+			<th>Blik number</th>
+			<th>Dishes</th>
+		</tr>
+
+		@foreach (var order in service.Orders)
+		{
+			<tr>
+				<td>@order.Id</td>
+				<td>@order.RestaurantName</td>
+				<td><a href="@order.MenuLink" target="_blank">Click</a></td>
+				<td>@order.MinPrice</td>
+				<td>@order.DeliveryPrice</td>
+				<td>@order.FreeDeliveryPrice</td>
+				<td>@order.BLIKNumber</td>
+				<td><button @onclick="()=>ShowDishes(order.Id)">Click</button></td>
+			</tr>
+		}
+	</table>
+</body>
+
+@code {
+
+
+
+	void ShowDishes(long id)
+	{
+		Service.GetDishes(id);
+		UriHelper.NavigateTo("/Dishes");
+	}
+
+
+	
+}

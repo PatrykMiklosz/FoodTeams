@@ -1,0 +1,78 @@
+﻿@page "/CreateDish"
+@using FoodTeams.Entities
+@using System.Linq
+@using FoodTeams.Services
+@inject OrderService Service
+@inject DishService service
+@inject FoodTeamsDbContext dbcontext
+
+
+
+<head>
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 20px;
+		}
+
+		th {
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1 style="text-align:center">ORDER</h1>
+
+	<table style="width:100%">
+		<tr>
+			<th>Id</th>
+			<th>Restaurant Name</th>
+			<th>Menu link</th>
+			<th>Minimal price</th>
+			<th>Delivery price</th>
+			<th>Free delivery price</th>
+			<th>Blik number</th>
+		</tr>
+		<tr>
+			<td>@Service.Order.Id</td>
+			<td>@Service.Order.RestaurantName</td>
+			<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
+			<td>@Service.Order.MinPrice</td>
+			<td>@Service.Order.DeliveryPrice</td>
+			<td>@Service.Order.FreeDeliveryPrice</td>
+			<td>@Service.Order.BLIKNumber</td>
+		</tr>
+	</table>
+
+	<h1 style="text-align:center">CreateDish</h1>
+
+	<input placeholder="Description" @bind="Description" />
+	<input placeholder="Extras" @bind="Extras" />
+	<label for="Price">Price:</label>
+	<input id="Price" type="number" min="0" placeholder="Price" @bind="Price" />
+	<label for="UserId">Free delivery price:</label>
+	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
+	<button @onclick="()=>AddNewDish(Service.NewOrderId)">Add dish</button>
+</body>
+
+@code {
+
+	public string Description { get; set; }
+	public string Extras { get; set; }
+	public decimal Price { get; set; }
+	public long UserId { get; set; }
+
+	public void AddNewDish(long id)
+	{
+		service.CreateDish(id, Description, Extras, Price, UserId);
+	}
+}

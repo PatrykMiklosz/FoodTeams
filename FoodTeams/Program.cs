@@ -15,6 +15,7 @@ builder.Services.AddHttpClient("WebClient", client => client.Timeout = TimeSpan.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<FoodTeamsDbContext>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<DishService>();
 
 
 var app = builder.Build();

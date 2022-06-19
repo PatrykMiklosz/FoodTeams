@@ -8,6 +8,7 @@
 @inject IConfiguration Configuration
 @inject NavigationManager MyNavigationManager
 @inject NavigationManager UriHelper
+@page "/Welcome"
 
 @if(isLoading)
 {
@@ -20,9 +21,9 @@ else
       <div class="welcome page">
         <div class="narrow page-padding">
             <img src="FOOD.png" />
-            <h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px"Appearance="Appearance.Accent">New order</FluentButton></h1>
-            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral">Active orders</FluentButton></p>
-            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral"@onclick="Navigate">Order history</FluentButton></p>
+            <h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px"Appearance="Appearance.Accent" @onclick="NavigateToNewOrder">New order</FluentButton></h1>
+            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToActiveOrders">Active orders</FluentButton></p>
+            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToOrderHistory">Order history</FluentButton></p>
         </div>
     </div>
 }
@@ -43,8 +44,8 @@ else
 
             if (isInTeams)
             { 
-               var user = await teamsUserCredential.GetUserInfoAsync();
-               userName = user.DisplayName;
+                var user = await teamsUserCredential.GetUserInfoAsync();
+                userName = user.DisplayName;
             }
             else
             {
@@ -61,9 +62,19 @@ else
         return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
     }
 
-      void Navigate()
+    void NavigateToNewOrder()
     {
-         UriHelper.NavigateTo("orderHistory");
+        UriHelper.NavigateTo("/NewOrder");
+    }
+
+      void NavigateToOrderHistory()
+    {
+         UriHelper.NavigateTo("/OrderHistory");
+    }
+
+    void NavigateToActiveOrders()
+    {
+        UriHelper.NavigateTo("/ActiveOrders");
     }
 }
 
