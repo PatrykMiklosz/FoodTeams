@@ -1,0 +1,52 @@
+﻿@page "/NewOrder"
+@using FoodTeams.Entities
+@using FoodTeams.Services
+@inject OrderService service
+@inject NavigationManager UriHelper
+@inject FoodTeamsDbContext dbContext
+
+
+<h1 style="text-align:center">NEW ORDER</h1>
+
+
+<input placeholder="Restaurant Name" @bind="RestaurantName" />
+<input placeholder="MenuLink" @bind="MenuLink" />
+<label for="MinPrice">Minimal price:</label>
+<input id ="MinPrice" type="number" min="0" placeholder="MinPrice" @bind="MinPrice" />
+<label for="DeliveryPrice">Delivery price:</label>
+<input id="DeliveryPrice" type="number" min="0" placeholder="DeliveryPrice" @bind="DeliveryPrice" />
+<label for="FreeDeliveryPrice">Free delivery price:</label>
+<input id="FreeDeliveryPrice" type="number" min="0" placeholder="FreeDeliveryPrice" @bind="FreeDeliveryPrice" />
+<label for="BLIKNumber">BLIK number:</label>
+<input id="BLIKNumber" type="number" min="0" placeholder="BLIKNumber" @bind="BLIKNumber" />
+
+<button @onclick="()=>CreateNewOrder(order)">Create Order</button>
+
+
+
+@code {
+
+	public void CreateNewOrder(Order order)
+	{
+		order.RestaurantName=RestaurantName;
+		order.MenuLink=MenuLink;
+		order.MinPrice=MinPrice;
+		order.DeliveryPrice=DeliveryPrice;
+		order.FreeDeliveryPrice=FreeDeliveryPrice;
+		order.BLIKNumber = BLIKNumber;
+		service.CreateOrder(order);
+		service.Order = dbContext.Orders.FirstOrDefault(x => x.Id == service.NewOrderId);
+		UriHelper.NavigateTo("/CreateDish");
+	}
+
+	Order order = new Order();
+
+	public string RestaurantName {	get; set; }
+	public string MenuLink { get; set; }
+	public decimal MinPrice { get; set; }
+	public decimal DeliveryPrice { get; set; }
+	public decimal FreeDeliveryPrice { get; set; }
+	public long BLIKNumber { get; set; }
+
+}
+

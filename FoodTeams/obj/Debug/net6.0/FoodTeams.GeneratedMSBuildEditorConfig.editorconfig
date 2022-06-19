@@ -19,16 +19,16 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/CreateDish.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDcmVhdGVEaXNoLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/CurrentUser.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDdXJyZW50VXNlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/Deploy.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEZXBsb3kucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/EditCode.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFZGl0Q29kZS5yYXpvcg==
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/Dishes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xEaXNoZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/Graph.razor]
@@ -39,8 +39,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMb2FkaW5nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/Publish.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQdWJsaXNoLnJhem9y
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/NewOrder.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xOZXdPcmRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/OrderHistory.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xPcmRlckhpc3RvcnkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Pages/Privacy.razor]

@@ -7,6 +7,8 @@
 @inject IWebHostEnvironment HostEnvironment
 @inject IConfiguration Configuration
 @inject NavigationManager MyNavigationManager
+@inject NavigationManager UriHelper
+@page "/Welcome"
 
 @if(isLoading)
 {
@@ -16,32 +18,12 @@
 }
 else
 {
-    <div class="welcome page">
+      <div class="welcome page">
         <div class="narrow page-padding">
-            <img src="hello.png" />
-            <h1 class="center">Congratulations@(!String.IsNullOrEmpty(userName) ? ", " + userName : "")!</h1>
-            <p class="center">Your app is running in your @(GetEnvironmentName())</p>
-            <FluentTabs style="width: 80%; justify-content: space-between; margin: 4rem auto;">
-                <FluentTab style="font-size: 14px; min-height: 32px;">1. Build your app locally</FluentTab>
-                <FluentTab>2. Provision and Deploy to the Cloud</FluentTab>
-                <FluentTab>3. Publish to Teams</FluentTab>
-                <FluentTabPanel>
-                    <div style="display:block; width:100%;">
-                        <EditCode />
-                        @if (isInTeams)
-                        {
-                            <CurrentUser UserName="@userName" />
-                        }
-                        <Graph ErrorMessage="@errorMessage"/>
-                    </div>
-                </FluentTabPanel>
-                <FluentTabPanel>
-                    <Deploy/>
-                </FluentTabPanel>
-                <FluentTabPanel>
-                    <Publish/>
-                </FluentTabPanel>
-            </FluentTabs>
+            <img src="FOOD.png" />
+            <h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px"Appearance="Appearance.Accent" @onclick="NavigateToNewOrder">New order</FluentButton></h1>
+            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToActiveOrders">Active orders</FluentButton></p>
+            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToOrderHistory">Order history</FluentButton></p>
         </div>
     </div>
 }
@@ -62,8 +44,8 @@ else
 
             if (isInTeams)
             { 
-               var user = await teamsUserCredential.GetUserInfoAsync();
-               userName = user.DisplayName;
+                var user = await teamsUserCredential.GetUserInfoAsync();
+                userName = user.DisplayName;
             }
             else
             {
@@ -78,6 +60,21 @@ else
     private string GetEnvironmentName()
     {
         return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
+    }
+
+    void NavigateToNewOrder()
+    {
+        UriHelper.NavigateTo("/NewOrder");
+    }
+
+      void NavigateToOrderHistory()
+    {
+         UriHelper.NavigateTo("/OrderHistory");
+    }
+
+    void NavigateToActiveOrders()
+    {
+        UriHelper.NavigateTo("/ActiveOrders");
     }
 }
 

@@ -2,7 +2,7 @@
 
 namespace FoodTeams.Entities
 {
-    public class TeamsProjectDbContext : DbContext
+    public class FoodTeamsDbContext : DbContext
     {
         private string _connectionString =
            "Server=.;Database=FoodTeamsDb;Trusted_Connection=True;";
