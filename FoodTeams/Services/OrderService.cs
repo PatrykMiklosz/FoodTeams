@@ -19,6 +19,7 @@ namespace FoodTeams.Services
         {
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
+            Orders.Add(order);
             NewOrderId = order.Id;
             Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }

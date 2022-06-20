@@ -78,9 +78,10 @@
 
 	public void AddNewDish(long id)
 	{
-		UriHelper.NavigateTo("/Blank");
 		service.CreateDish(id, Description, Extras, Price, UserId);
-		
+		service.GetDishes(id);
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+
 	}
 
 	public void NavigateToMainMenu()

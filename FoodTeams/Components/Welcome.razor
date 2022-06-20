@@ -1,4 +1,5 @@
-﻿@using Microsoft.Extensions.Configuration
+﻿@using FoodTeams.Services
+@using Microsoft.Extensions.Configuration
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Hosting
 @inject TeamsFx teamsfx
@@ -8,73 +9,74 @@
 @inject IConfiguration Configuration
 @inject NavigationManager MyNavigationManager
 @inject NavigationManager UriHelper
+@inject OrderService Service
 @page "/Welcome"
 
-@if(isLoading)
+@if (isLoading)
 {
-    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-		<FluentProgressRing/>
+	<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+		<FluentProgressRing />
 	</div>
 }
 else
 {
-      <div class="welcome page">
-        <div class="narrow page-padding">
-            <img src="FOOD.png" />
-            <h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px"Appearance="Appearance.Accent" @onclick="NavigateToNewOrder">New order</FluentButton></h1>
-            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToActiveOrders">Active orders</FluentButton></p>
-            <p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToOrderHistory">Order history</FluentButton></p>
-        </div>
-    </div>
+	<div class="welcome page">
+		<div class="narrow page-padding">
+			<img src="FOOD.png" />
+			<h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Accent" @onclick="NavigateToNewOrder">New order</FluentButton></h1>
+			<p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToActiveOrders">Active orders</FluentButton></p>
+			<p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToOrderHistory">Order history</FluentButton></p>
+		</div>
+	</div>
 }
 
 @code {
-    string userName;
-    string errorMessage;
-    bool isInTeams;
-    bool isLoading = true; 
+	string userName;
+	string errorMessage;
+	bool isInTeams;
+	bool isLoading = true;
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		await base.OnAfterRenderAsync(firstRender);
 
-        if(firstRender)
-        {
-            isInTeams = await MicrosoftTeams.IsInTeams();
+		if (firstRender)
+		{
+			isInTeams = await MicrosoftTeams.IsInTeams();
 
-            if (isInTeams)
-            { 
-                var user = await teamsUserCredential.GetUserInfoAsync();
-                userName = user.DisplayName;
-            }
-            else
-            {
-                errorMessage = "Not running in Microsoft Teams.";
-            }
+			if (isInTeams)
+			{
+				var user = await teamsUserCredential.GetUserInfoAsync();
+				userName = user.DisplayName;
+			}
+			else
+			{
+				errorMessage = "Not running in Microsoft Teams.";
+			}
 
-            isLoading = false;
-            StateHasChanged();            
-        }
-    }
+			isLoading = false;
+			StateHasChanged();
+		}
+	}
 
-    private string GetEnvironmentName()
-    {
-        return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
-    }
+	private string GetEnvironmentName()
+	{
+		return HostEnvironment.IsDevelopment() ? "local environment" : "Azure environment";
+	}
 
-     void NavigateToNewOrder()
-    {
-        UriHelper.NavigateTo("/NewOrder");
-    }
+	void NavigateToNewOrder()
+	{
+		UriHelper.NavigateTo("/NewOrder");
+	}
 
-      void NavigateToOrderHistory()
-    {
-         UriHelper.NavigateTo("/OrderHistory");
-    }
+	void NavigateToOrderHistory()
+	{
+		UriHelper.NavigateTo("/OrderHistory");
+	}
 
-    void NavigateToActiveOrders()
-    {
-        UriHelper.NavigateTo("/ActiveOrders");
-    }
+	void NavigateToActiveOrders()
+	{
+		UriHelper.NavigateTo("/ActiveOrders");
+	}
 }
 
