@@ -40,6 +40,7 @@
 			<th>Free delivery price</th>
 			<th>Blik number</th>
 			<th>Dishes</th>
+			<th>Actions</th>
 		</tr>
 
 		@foreach (var order in service.Orders.Where(x => x.IsActive == true))
@@ -53,6 +54,13 @@
 				<td>@order.FreeDeliveryPrice</td>
 				<td>@order.BLIKNumber</td>
 				<td><button @onclick="()=>ShowDishes(order.Id)">Add dish</button></td>
+				<td>
+					<button @onclick="()=>CompleteOrder(order.Id)">Complete</button>
+					<span>/</span>
+					<button @onclick="EditOrder">Edit</button>
+					<span>/</span>
+					<button @onclick="DeleteOrder">Delete</button>
+				</td>
 			</tr>
 		}
 	</table>
@@ -62,6 +70,21 @@
 </body>
 
 @code {
+
+	public void EditOrder()
+	{
+
+	}
+
+	public void DeleteOrder()
+	{
+
+	}
+
+	public void CompleteOrder(long id)
+	{
+		service.CompleteOrder(id);
+	}
 
 	void ShowDishes(long id)
 	{

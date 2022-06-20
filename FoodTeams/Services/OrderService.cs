@@ -23,5 +23,17 @@ namespace FoodTeams.Services
             NewOrderId = order.Id;
             Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }
+
+        public void CompleteOrder(long id)
+		{
+            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);  
+            order.IsActive = false;
+            dbContext.SaveChanges();
+		}
+
+        public void GetOrder(long id)
+        {
+            this.Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

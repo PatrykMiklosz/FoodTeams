@@ -40,7 +40,7 @@
 			<th>Details</th>
 		</tr>
 
-		@foreach (var order in service.Orders)
+		@foreach (var order in service.Orders.Where(x=>x.IsActive==false))
 		{
 			<tr>
 				<td>@order.Id</td>
@@ -65,6 +65,8 @@
 
 	void ShowDishes(long id)
 	{
+		service.GetOrder(id);
+		Service.GetDishes(id);
 		UriHelper.NavigateTo("/Dishes");
 	}
 
