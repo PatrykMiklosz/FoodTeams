@@ -23,17 +23,17 @@ namespace FoodTeams.Services
 
         public void CreateDish(long id, string description, string extras, decimal price, long userId)
         {
-            var dish = new Dish
-            {
-                OrderId = id,
-                Description = description,
-                Extras = extras,
-                Price = price,
-                UserId = userId
-            };
+            var dish = new Dish();
+
+            dish.OrderId = id;
+            dish.Description = description;
+            dish.Extras = extras;
+            dish.Price = price;
+            dish.UserId = userId;
+
             dbContext.Add(dish);
             dbContext.SaveChanges();
-            
+
         }
     }
 }

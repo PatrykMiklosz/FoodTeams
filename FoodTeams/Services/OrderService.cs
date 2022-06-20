@@ -4,23 +4,23 @@ namespace FoodTeams.Services
 {
     public class OrderService
     {
-        private readonly FoodTeamsDbContext dbcontext;
+        private readonly FoodTeamsDbContext dbContext;
         public List<Order> Orders { get; set; }
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
 
-        public OrderService(FoodTeamsDbContext dbcontext)
+        public OrderService(FoodTeamsDbContext dbContext)
         {
-            this.dbcontext = dbcontext;
-            Orders = dbcontext.Orders.ToList();
+            this.dbContext = dbContext;
+            Orders = dbContext.Orders.ToList();
         }
 
         public void CreateOrder(Order order)
         {   
-            dbcontext.Orders.Add(order);
-            dbcontext.SaveChanges();
+            dbContext.Orders.Add(order);
+            dbContext.SaveChanges();
             NewOrderId = order.Id;
-
+            Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }
 
     }

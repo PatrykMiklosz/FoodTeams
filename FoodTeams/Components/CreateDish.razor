@@ -43,7 +43,7 @@
 			<th>Blik number</th>
 		</tr>
 		<tr>
-			<td>@Service.Order.Id</td>
+			<td>@Service.NewOrderId</td>
 			<td>@Service.Order.RestaurantName</td>
 			<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
 			<td>@Service.Order.MinPrice</td>
@@ -59,7 +59,7 @@
 	<input placeholder="Extras" @bind="Extras" />
 	<label for="Price">Price:</label>
 	<input id="Price" type="number" min="0" placeholder="Price" @bind="Price" />
-	<label for="UserId">Free delivery price:</label>
+	<label for="UserId">User Id:</label>
 	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
 	<button @onclick="()=>AddNewDish(Service.NewOrderId)">Add dish</button>
 </body>
