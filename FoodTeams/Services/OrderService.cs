@@ -16,12 +16,11 @@ namespace FoodTeams.Services
         }
 
         public void CreateOrder(Order order)
-        {   
+        {
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
             NewOrderId = order.Id;
             Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }
-
     }
 }

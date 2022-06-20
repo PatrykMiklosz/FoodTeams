@@ -2,6 +2,7 @@
 @using FoodTeams.Entities
 @using System.Linq
 @using FoodTeams.Services
+@inject NavigationManager UriHelper
 @inject OrderService Service
 @inject DishService service
 @inject FoodTeamsDbContext dbcontext
@@ -62,6 +63,10 @@
 	<label for="UserId">User Id:</label>
 	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
 	<button @onclick="()=>AddNewDish(Service.NewOrderId)">Add dish</button>
+
+	<br />
+
+	<button style="text-align:center; height:30px; width:150px ;margin:20px" @onclick="NavigateToMainMenu">Main menu</button>
 </body>
 
 @code {
@@ -73,6 +78,13 @@
 
 	public void AddNewDish(long id)
 	{
+		UriHelper.NavigateTo("/Blank");
 		service.CreateDish(id, Description, Extras, Price, UserId);
+		
+	}
+
+	public void NavigateToMainMenu()
+	{
+		UriHelper.NavigateTo("/Welcome");
 	}
 }

@@ -5,7 +5,7 @@ namespace FoodTeams.Entities
     public class FoodTeamsDbContext : DbContext
     {
         private string _connectionString =
-           "Server=.;Database=FoodTeamsDb;Trusted_Connection=True;";
+           "Server=.;Database=FoodTeams3Db;Trusted_Connection=True;";
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }

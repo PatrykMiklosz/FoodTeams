@@ -1,0 +1,13 @@
+﻿@page "/Blank"
+@inject NavigationManager UriHelper
+
+
+<h1>DISH CREATED</h1>
+<button @onclick="Back">OK</button>
+
+@code {
+	public void Back()
+	{
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+}

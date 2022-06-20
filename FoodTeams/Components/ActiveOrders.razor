@@ -1,8 +1,13 @@
-﻿@page "/OrderHistory"
+﻿@page "/ActiveOrders"
+@using FoodTeams.Entities
 @using FoodTeams.Services
 @inject NavigationManager UriHelper
 @inject OrderService service
 @inject DishService Service
+
+
+
+<h1 style="text-align:center">Active Orders</h1>
 
 <head>
 	<style>
@@ -25,9 +30,6 @@
 </head>
 
 <body>
-
-	<h1 style="text-align:center">Order history</h1>
-
 	<table style="width:100%">
 		<tr>
 			<th>Id</th>
@@ -37,10 +39,10 @@
 			<th>Delivery price</th>
 			<th>Free delivery price</th>
 			<th>Blik number</th>
-			<th>Details</th>
+			<th>Dishes</th>
 		</tr>
 
-		@foreach (var order in service.Orders)
+		@foreach (var order in service.Orders.Where(x => x.IsActive == true))
 		{
 			<tr>
 				<td>@order.Id</td>
@@ -50,7 +52,7 @@
 				<td>@order.DeliveryPrice</td>
 				<td>@order.FreeDeliveryPrice</td>
 				<td>@order.BLIKNumber</td>
-				<td><button @onclick="()=>ShowDishes(order.Id)">Show details</button></td>
+				<td><button @onclick="()=>ShowDishes(order.Id)">Add dish</button></td>
 			</tr>
 		}
 	</table>
@@ -61,21 +63,14 @@
 
 @code {
 
-
-
 	void ShowDishes(long id)
 	{
 		Service.GetDishes(id);
-		UriHelper.NavigateTo("/Dishes");
+		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
 	public void NavigateToPrevious()
 	{
 		UriHelper.NavigateTo("/Welcome");
 	}
-
-
-
-
-	
 }

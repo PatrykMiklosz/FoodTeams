@@ -19,6 +19,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/ActiveOrderDishes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBY3RpdmVPcmRlckRpc2hlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/ActiveOrders.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBY3RpdmVPcmRlcnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/Blank.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xCbGFuay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/CreateDish.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDcmVhdGVEaXNoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 

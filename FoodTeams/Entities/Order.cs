@@ -5,6 +5,8 @@ namespace FoodTeams.Entities
     public class Order
     {
         public long Id { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public bool? IsActive { get; set; }
         public string RestaurantName { get; set; }
         public string MenuLink { get; set; }
         public decimal MinPrice { get; set; }
