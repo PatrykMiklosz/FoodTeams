@@ -114,14 +114,14 @@
 	{
 		service.CreateDish(id, Description, Extras, Price, UserId);
 		service.GetDishes(id);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		StateHasChanged();
 	}
 
 	public void DeleteDish(long id)
 	{
 		service.DeleteDish(id);
 		service.GetDishes(Service.Order.Id);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		StateHasChanged();
 	}
 
 	public void EditDish(long id)
