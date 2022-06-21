@@ -37,6 +37,7 @@
 			<th>Delivery price</th>
 			<th>Free delivery price</th>
 			<th>Blik number</th>
+			<th>Order date</th>
 			<th>Actions</th>
 		</tr>
 
@@ -50,8 +51,9 @@
 				<td>@order.DeliveryPrice</td>
 				<td>@order.FreeDeliveryPrice</td>
 				<td>@order.BLIKNumber</td>
+				<td>@order.CreateDate</td>
 				<td>
-					<button @onclick="()=>Restore(order.Id)">Restore</button>
+					<button disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
 					<span>/</span>
 					<button @onclick="()=>ShowDishes(order.Id)">Show details</button>
 				</td>
@@ -64,8 +66,8 @@
 </body>
 
 @code {
-
-
+	
+	public DateTime date = DateTime.Today.AddHours(-8);
 
 	void ShowDishes(long id)
 	{
