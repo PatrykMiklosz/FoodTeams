@@ -59,6 +59,7 @@
 			<th>Extras</th>
 			<th>Price</th>
 			<th>UserId</th>
+			<th>Actions</th>
 		</tr>
 
 		@foreach (var dish in service.dishes)
@@ -69,6 +70,10 @@
 				<td>@dish.Extras</td>
 				<td>@dish.Price</td>
 				<td>@dish.UserId</td>
+				<td>
+					
+					<button @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
+				</td>
 			</tr>
 		}
 	</table>
@@ -89,10 +94,6 @@
 
 @code {
 
-	public void NavigateToNewDish()
-	{
-		//UriHelper.NavigateTo("/CreateDish/{OrderId}");
-	}
 
 	public void NavigateToMainMenu()
 	{
@@ -113,6 +114,13 @@
 	{
 		service.CreateDish(id, Description, Extras, Price, UserId);
 		service.GetDishes(id);
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+
+	public void DeleteDish(long id)
+	{
+		service.DeleteDish(id);
+		service.GetDishes(Service.Order.Id);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 

@@ -53,7 +53,9 @@
 				<td>@order.DeliveryPrice</td>
 				<td>@order.FreeDeliveryPrice</td>
 				<td>@order.BLIKNumber</td>
-				<td><button @onclick="()=>ShowDishes(order.Id)">Add dish</button></td>
+				<td>
+					<button @onclick="()=>ShowDishes(order.Id)">Add / Edit/ Delete </button>
+				</td>
 				<td>
 					<button @onclick="()=>CompleteOrder(order.Id)">Complete</button>
 					<span>/</span>

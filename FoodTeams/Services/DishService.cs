@@ -32,5 +32,12 @@ namespace FoodTeams.Services
             dbContext.Add(dish);
             dbContext.SaveChanges();
         }
+
+        public void DeleteDish(long id)
+        {
+            var dish = dbContext.Dishes.Where(x => x.Id == id).FirstOrDefault();
+            dbContext.Remove(dish);
+            dbContext.SaveChanges();
+        }
     }
 }
