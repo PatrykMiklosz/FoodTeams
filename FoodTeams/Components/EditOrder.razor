@@ -2,6 +2,8 @@
 @using FoodTeams.Entities
 @using FoodTeams.Services
 @inject OrderService service
+@inject NavigationManager UriHelper
+
 <h1 style=" text-align:center">Edit Order</h1>
 
 <input placeholder="@service.Order.RestaurantName" @bind="RestaurantName" />
@@ -24,6 +26,7 @@
 	{
 		GetOrder(order);
 		service.UpdateOrder(order);
+		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
 	public void GetOrder(Order order)
