@@ -82,7 +82,7 @@
 	public void DeleteOrder(long id)
 	{
 		service.DeleteOrder(id);
-		UriHelper.NavigateTo("/Welcome");
+		StateHasChanged();
 	}
 
 	public void CompleteOrder(long id)
