@@ -57,9 +57,9 @@
 				<td>
 					<button @onclick="()=>CompleteOrder(order.Id)">Complete</button>
 					<span>/</span>
-					<button @onclick="EditOrder">Edit</button>
+					<button @onclick="()=>EditOrder(order.Id)">Edit</button>
 					<span>/</span>
-					<button @onclick="DeleteOrder">Delete</button>
+					<button @onclick="()=>DeleteOrder(order.Id)">Delete</button>
 				</td>
 			</tr>
 		}
@@ -71,14 +71,16 @@
 
 @code {
 
-	public void EditOrder()
+	public void EditOrder(long id)
 	{
-
+		service.EditOrder(id);
+		UriHelper.NavigateTo("/EditOrder");
 	}
 
-	public void DeleteOrder()
+	public void DeleteOrder(long id)
 	{
-
+		service.DeleteOrder(id);
+		UriHelper.NavigateTo("/Welcome");
 	}
 
 	public void CompleteOrder(long id)

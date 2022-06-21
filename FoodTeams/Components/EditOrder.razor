@@ -1,0 +1,47 @@
+﻿@page "/EditOrder"
+@using FoodTeams.Entities
+@using FoodTeams.Services
+@inject OrderService service
+<h1 style=" text-align:center">Edit Order</h1>
+
+<input placeholder="@service.Order.RestaurantName" @bind="RestaurantName" />
+<input placeholder="service.Order.MenuLink" @bind="MenuLink" />
+<label for="MinPrice">service.Order.Minimal price:</label>
+<input id="MinPrice" type="number" min="0" placeholder="service.Order.MinPrice" @bind="MinPrice" />
+<label for="DeliveryPrice">Delivery price:</label>
+<input id="DeliveryPrice" type="number" min="0" placeholder="service.Order.DeliveryPrice" @bind="DeliveryPrice" />
+<label for="service.Order.FreeDeliveryPrice">Free delivery price:</label>
+<input id="FreeDeliveryPrice" type="number" min="0" placeholder="service.Order.FreeDeliveryPrice" @bind="FreeDeliveryPrice" />
+<br />
+<label for="BLIKNumber">BLIK number:</label>
+<input id="BLIKNumber" type="number" min="0" placeholder="BLIKNumber" @bind="BLIKNumber" />
+
+<button @onclick="()=>UpdateOrder(service.Order)">Edit Order</button>
+
+@code {
+
+	public void UpdateOrder(Order order)
+	{
+		GetOrder(order);
+		service.UpdateOrder(order);
+	}
+
+	public void GetOrder(Order order)
+	{
+		order.RestaurantName = RestaurantName;
+		order.MenuLink = MenuLink;
+		order.MinPrice = MinPrice;
+		order.DeliveryPrice = DeliveryPrice;
+		order.FreeDeliveryPrice = FreeDeliveryPrice;
+		order.BLIKNumber = BLIKNumber;
+		order.CreateDate = DateTime.Now;
+		order.IsActive = true;
+	}
+	public string RestaurantName { get; set; }
+	public string MenuLink { get; set; }
+	public decimal MinPrice { get; set; }
+	public decimal DeliveryPrice { get; set; }
+	public decimal FreeDeliveryPrice { get; set; }
+	public long BLIKNumber { get; set; }
+
+}

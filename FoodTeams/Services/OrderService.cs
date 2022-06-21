@@ -42,5 +42,32 @@ namespace FoodTeams.Services
             order.IsActive = true;
             dbContext.SaveChanges();
         }
+
+        public void DeleteOrder(long id)
+        {
+            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+            dbContext.Orders.Remove(order);
+            dbContext.SaveChanges();
+            Orders.Remove(order);
+        }
+
+        public void EditOrder(long id)
+        {
+            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+            Order = order;
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            Order.RestaurantName = order.RestaurantName;
+            Order.MenuLink = order.MenuLink;
+            Order.MinPrice = order.MinPrice;
+            Order.DeliveryPrice = order.DeliveryPrice;
+            Order.FreeDeliveryPrice = order.FreeDeliveryPrice;
+            Order.BLIKNumber = order.BLIKNumber;
+            Order.CreateDate = DateTime.Now;
+            Order.IsActive = true;
+            dbContext.SaveChanges();
+        }
     }
 }
