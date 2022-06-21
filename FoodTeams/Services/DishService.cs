@@ -8,6 +8,7 @@ namespace FoodTeams.Services
         private readonly FoodTeamsDbContext dbContext;
         private readonly OrderService orderService;
         public IEnumerable<Dish> dishes = new List<Dish>();
+        public Dish dish = new Dish();
 
         public DishService(FoodTeamsDbContext dbContext, OrderService orderService)
         {
@@ -39,5 +40,21 @@ namespace FoodTeams.Services
             dbContext.Remove(dish);
             dbContext.SaveChanges();
         }
+
+        public void UpdateDish(long id)
+		{
+            var dish = dbContext.Dishes.Where(x => x.Id == id).FirstOrDefault();
+            this.dish = dish;
+        }
+
+        public void EditDish(string description, string extras, decimal price, long userId)
+        {
+            dish.Description = description;
+            dish.Extras = extras;
+            dish.Price = price;
+            dish.UserId = userId;
+            dbContext.SaveChanges();
+        }
+
     }
 }

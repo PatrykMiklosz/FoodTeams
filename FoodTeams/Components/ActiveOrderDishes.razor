@@ -71,7 +71,7 @@
 				<td>@dish.Price</td>
 				<td>@dish.UserId</td>
 				<td>
-					
+					<button @onclick="()=>EditDish(dish.Id)">Edit dish</button>
 					<button @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
 				</td>
 			</tr>
@@ -122,6 +122,12 @@
 		service.DeleteDish(id);
 		service.GetDishes(Service.Order.Id);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+
+	public void EditDish(long id)
+	{
+		service.UpdateDish(id);
+		UriHelper.NavigateTo("/EditDish");
 	}
 
 }
