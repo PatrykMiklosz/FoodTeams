@@ -35,5 +35,12 @@ namespace FoodTeams.Services
         {
             this.Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
+
+        public void RestoreOrder(long id)
+        {
+            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+            order.IsActive = true;
+            dbContext.SaveChanges();
+        }
     }
 }

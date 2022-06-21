@@ -37,10 +37,10 @@
 			<th>Delivery price</th>
 			<th>Free delivery price</th>
 			<th>Blik number</th>
-			<th>Details</th>
+			<th>Actions</th>
 		</tr>
 
-		@foreach (var order in service.Orders.Where(x=>x.IsActive==false))
+		@foreach (var order in service.Orders.Where(x => x.IsActive == false))
 		{
 			<tr>
 				<td>@order.Id</td>
@@ -50,7 +50,11 @@
 				<td>@order.DeliveryPrice</td>
 				<td>@order.FreeDeliveryPrice</td>
 				<td>@order.BLIKNumber</td>
-				<td><button @onclick="()=>ShowDishes(order.Id)">Show details</button></td>
+				<td>
+					<button @onclick="()=>Restore(order.Id)">Restore</button>
+					<span>/</span>
+					<button @onclick="()=>ShowDishes(order.Id)">Show details</button>
+				</td>
 			</tr>
 		}
 	</table>
@@ -75,8 +79,14 @@
 		UriHelper.NavigateTo("/Welcome");
 	}
 
+	public void Restore(long id)
+	{
+		service.RestoreOrder(id);
+		UriHelper.NavigateTo("/ActiveOrders");
+	}
 
 
 
-	
+
+
 }
