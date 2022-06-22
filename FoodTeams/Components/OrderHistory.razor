@@ -4,31 +4,13 @@
 @inject OrderService service
 @inject DishService Service
 
-<head>
-	<style>
-		table,
-		th,
-		td {
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
 
-		th,
-		td {
-			padding: 20px;
-		}
-
-		th {
-			text-align: left;
-		}
-	</style>
-</head>
 
 <body>
 
 	<h1 style="text-align:center">Order history</h1>
 
-	<table style="width:100%">
+	<table class="table table-bordered table-striped" >
 		<tr>
 			<th>Id</th>
 			<th>Restaurant Name</th>
