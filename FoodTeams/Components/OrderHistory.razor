@@ -10,36 +10,40 @@
 
 	<h1 style="text-align:center">Order history</h1>
 
-	<table class="table table-bordered table-striped" >
-		<tr>
-			<th>Id</th>
-			<th>Restaurant Name</th>
-			<th>Menu link</th>
-			<th>Minimal price</th>
-			<th>Delivery price</th>
-			<th>Free delivery price</th>
-			<th>Blik number</th>
-			<th>Order date</th>
-			<th>Actions</th>
-		</tr>
-
-		@foreach (var order in service.Orders.Where(x => x.IsActive == false))
-		{
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
 			<tr>
-				<td>@order.Id</td>
-				<td>@order.RestaurantName</td>
-				<td><a href="@order.MenuLink" target="_blank">Click</a></td>
-				<td>@order.MinPrice</td>
-				<td>@order.DeliveryPrice</td>
-				<td>@order.FreeDeliveryPrice</td>
-				<td>@order.BLIKNumber</td>
-				<td>@order.CreateDate</td>
-				<td>
-					<button class="btn btn-success" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
-					<button class="btn btn-warning" @onclick="()=>ShowDishes(order.Id)">Show details</button>
-				</td>
+				<th>Id</th>
+				<th>Restaurant Name</th>
+				<th>Menu link</th>
+				<th>Minimal price</th>
+				<th>Delivery price</th>
+				<th>Free delivery price</th>
+				<th>Blik number</th>
+				<th>Order date</th>
+				<th>Actions</th>
 			</tr>
-		}
+		</thead>
+
+		<tbody>
+			@foreach (var order in service.Orders.Where(x => x.IsActive == false))
+			{
+				<tr>
+					<td><b>@order.Id</b></td>
+					<td>@order.RestaurantName</td>
+					<td><a href="@order.MenuLink" target="_blank">Click</a></td>
+					<td>@order.MinPrice</td>
+					<td>@order.DeliveryPrice</td>
+					<td>@order.FreeDeliveryPrice</td>
+					<td>@order.BLIKNumber</td>
+					<td>@order.CreateDate</td>
+					<td>
+						<button class="btn btn-success" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
+						<button class="btn btn-warning" @onclick="()=>ShowDishes(order.Id)">Show details</button>
+					</td>
+				</tr>
+			}
+		</tbody>
 	</table>
 
 	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
@@ -47,7 +51,7 @@
 </body>
 
 @code {
-	
+
 	public DateTime date = DateTime.Today.AddHours(-8);
 
 	void ShowDishes(long id)

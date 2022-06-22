@@ -52,30 +52,34 @@
 
 	<h1 style="text-align:center">DISHES</h1>
 
-	<table style="width:100%">
-		<tr>
-			<th>Id</th>
-			<th>Description</th>
-			<th>Extras</th>
-			<th>Price</th>
-			<th>UserId</th>
-			<th>Actions</th>
-		</tr>
-
-		@foreach (var dish in service.dishes)
-		{
+	<table class="table table-striped table-bordered">
+		<thead class="thead-dark">
 			<tr>
-				<td>@dish.Id</td>
-				<td>@dish.Description</td>
-				<td>@dish.Extras</td>
-				<td>@dish.Price</td>
-				<td>@dish.UserId</td>
-				<td>
-					<button class="btn btn-warning" @onclick="()=>EditDish(dish.Id)">Edit dish</button>
-					<button class="btn btn-danger" @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
-				</td>
+				<th>Id</th>
+				<th>Description</th>
+				<th>Extras</th>
+				<th>Price</th>
+				<th>UserId</th>
+				<th>Actions</th>
 			</tr>
-		}
+		</thead>
+
+		<tbody>
+			@foreach (var dish in service.dishes)
+			{
+				<tr>
+					<td><b>@dish.Id</b></td>
+					<td>@dish.Description</td>
+					<td>@dish.Extras</td>
+					<td>@dish.Price</td>
+					<td>@dish.UserId</td>
+					<td>
+						<button class="btn btn-warning" @onclick="()=>EditDish(dish.Id)">Edit dish</button>
+						<button class="btn btn-danger" @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
+					</td>
+				</tr>
+			}
+		</tbody>
 	</table>
 
 	<input placeholder="Description" @bind="Description" />

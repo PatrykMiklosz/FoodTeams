@@ -7,64 +7,50 @@
 
 
 
-<h1 style="text-align:center">Active Orders</h1>
+<h1 class="display-3 mb-10" style="text-align:center">Active Orders</h1>
 
-<head>
-	<style>
-		table,
-		th,
-		td {
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
 
-		th,
-		td {
-			padding: 20px;
-		}
-
-		th {
-			text-align: left;
-		}
-	</style>
-</head>
 
 <body>
-	<table style="width:100%">
-		<tr>
-			<th>Id</th>
-			<th>Restaurant Name</th>
-			<th>Menu link</th>
-			<th>Minimal price</th>
-			<th>Delivery price</th>
-			<th>Free delivery price</th>
-			<th>Blik number</th>
-			<th>Dishes</th>
-			<th>Actions</th>
-		</tr>
-
-		@foreach (var order in service.Orders.Where(x => x.IsActive == true))
-		{
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
 			<tr>
-				<td>@order.Id</td>
-				<td>@order.RestaurantName</td>
-				<td><a href="@order.MenuLink" target="_blank">Click</a></td>
-				<td>@order.MinPrice</td>
-				<td>@order.DeliveryPrice</td>
-				<td>@order.FreeDeliveryPrice</td>
-				<td>@order.BLIKNumber</td>
-				<td>
-					<button @onclick="()=>ShowDishes(order.Id)">Add / Edit / Delete </button>
-				</td>
-				<td>
-					<button class="btn btn-success" @onclick="()=>CompleteOrder(order.Id)">Complete</button>
-					<span></span>
-					<button class="btn btn-warning" @onclick="()=>EditOrder(order.Id)">Edit</button>
-					<span></span>
-					<button class="btn btn-danger" @onclick="()=>OpenDeleteDialog(order)">Delete</button>
-				</td>
+				<th>Id</th>
+				<th>Restaurant Name</th>
+				<th>Menu link</th>
+				<th>Minimal price</th>
+				<th>Delivery price</th>
+				<th>Free delivery price</th>
+				<th>Blik number</th>
+				<th>Dishes</th>
+				<th>Actions</th>
 			</tr>
-		}
+		</thead>
+
+		<tbody>
+			@foreach (var order in service.Orders.Where(x => x.IsActive == true))
+			{
+				<tr>
+					<td><b>@order.Id</b></td>
+					<td>@order.RestaurantName</td>
+					<td><a href="@order.MenuLink" target="_blank">Click</a></td>
+					<td>@order.MinPrice</td>
+					<td>@order.DeliveryPrice</td>
+					<td>@order.FreeDeliveryPrice</td>
+					<td>@order.BLIKNumber</td>
+					<td>
+						<button @onclick="()=>ShowDishes(order.Id)">Add / Edit / Delete </button>
+					</td>
+					<td>
+						<button class="btn btn-success" @onclick="()=>CompleteOrder(order.Id)">Complete</button>
+						<span></span>
+						<button class="btn btn-warning" @onclick="()=>EditOrder(order.Id)">Edit</button>
+						<span></span>
+						<button class="btn btn-danger" @onclick="()=>OpenDeleteDialog(order)">Delete</button>
+					</td>
+				</tr>
+			}
+		</tbody>
 	</table>
 
 	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
@@ -72,10 +58,10 @@
 </body>
 @if (DeleteDialogOpen)
 {
-    <ModalDialog Title="Are you sure?"
-                 Text="Do you want to delete this entry?"
-                 OnClose="@OnDeleteDialogClose">
-    </ModalDialog>
+	<ModalDialog Title="Are you sure?"
+			 Text="Do you want to delete this entry?"
+			 OnClose="@OnDeleteDialogClose">
+	</ModalDialog>
 }
 @code {
 
@@ -126,5 +112,5 @@
 		DeleteDialogOpen = true;
 		service.Order = order;
 		StateHasChanged();
-    }
+	}
 }
