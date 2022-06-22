@@ -53,15 +53,14 @@
 				<td>@order.BLIKNumber</td>
 				<td>@order.CreateDate</td>
 				<td>
-					<button disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
-					<span>/</span>
-					<button @onclick="()=>ShowDishes(order.Id)">Show details</button>
+					<button class="btn btn-success" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
+					<button class="btn btn-warning" @onclick="()=>ShowDishes(order.Id)">Show details</button>
 				</td>
 			</tr>
 		}
 	</table>
 
-	<button style="text-align:center; height:30px; width:150px ;margin:20px" @onclick="NavigateToPrevious">Back</button>
+	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
 
 </body>
 

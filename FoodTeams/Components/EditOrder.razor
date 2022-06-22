@@ -18,9 +18,21 @@
 <label for="BLIKNumber">BLIK number:</label>
 <input id="BLIKNumber" type="number" min="0" placeholder="BLIKNumber" @bind="BLIKNumber" />
 
-<button @onclick="()=>UpdateOrder(service.Order)">Edit Order</button>
+<button class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">Confirm</button>
 
+<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+<button class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
 @code {
+
+	public void NavigateToMainMenu()
+	{
+		UriHelper.NavigateTo("/Welcome");
+	}
+
+	public void NavigateToPrevious()
+	{
+		UriHelper.NavigateTo("/ActiveOrders");
+	}
 
 	public void UpdateOrder(Order order)
 	{

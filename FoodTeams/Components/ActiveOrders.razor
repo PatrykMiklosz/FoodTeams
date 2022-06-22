@@ -57,17 +57,17 @@
 					<button @onclick="()=>ShowDishes(order.Id)">Add / Edit / Delete </button>
 				</td>
 				<td>
-					<button @onclick="()=>CompleteOrder(order.Id)">Complete</button>
-					<span>/</span>
-					<button @onclick="()=>EditOrder(order.Id)">Edit</button>
-					<span>/</span>
-					<button class="btn btn-danger btn-sm" @onclick="()=>OpenDeleteDialog(order)">Delete</button>
+					<button class="btn btn-success" @onclick="()=>CompleteOrder(order.Id)">Complete</button>
+					<span></span>
+					<button class="btn btn-warning" @onclick="()=>EditOrder(order.Id)">Edit</button>
+					<span></span>
+					<button class="btn btn-danger" @onclick="()=>OpenDeleteDialog(order)">Delete</button>
 				</td>
 			</tr>
 		}
 	</table>
 
-	<button style="text-align:center; height:30px; width:150px ;margin:20px" @onclick="NavigateToPrevious">Back</button>
+	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
 
 </body>
 @if (DeleteDialogOpen)

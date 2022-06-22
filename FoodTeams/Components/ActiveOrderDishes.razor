@@ -71,8 +71,8 @@
 				<td>@dish.Price</td>
 				<td>@dish.UserId</td>
 				<td>
-					<button @onclick="()=>EditDish(dish.Id)">Edit dish</button>
-					<button @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
+					<button class="btn btn-warning" @onclick="()=>EditDish(dish.Id)">Edit dish</button>
+					<button class="btn btn-danger" @onclick="()=>DeleteDish(dish.Id)">Delete dish</button>
 				</td>
 			</tr>
 		}
@@ -84,11 +84,11 @@
 	<input id="Price" type="number" min="0" placeholder="Price" @bind="Price" />
 	<label for="UserId">User Id:</label>
 	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
-	<button @onclick="()=>AddNewDish(Service.Order.Id)">Add dish</button>
+	<button class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">Add dish</button>
 	<br />
 
-	<button style="text-align:center; height:30px; width:150px ;margin:20px" @onclick="NavigateToPrevious">Back</button>
-	<button style="text-align:center; height:30px; width:150px ;margin:20px" @onclick="NavigateToMainMenu">Main menu</button>
+	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+	<button class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
 
 </body>
 
