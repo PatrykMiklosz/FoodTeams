@@ -7,31 +7,14 @@
 
 
 
-<head>
-	<style>
-		table,
-		th,
-		td {
-			border: 1px solid black;
-			border-collapse: collapse;
-		}
 
-		th,
-		td {
-			padding: 20px;
-		}
-
-		th {
-			text-align: left;
-		}
-	</style>
-</head>
 
 <body>
 
 	<h2 style="text-align:center">ORDER</h2>
 
-	<table style="width:100%">
+	<table class="table table-bordered table-striped" style="width:100%">
+		<thead class="thead-dark">
 		<tr>
 			<th>Id</th>
 			<th>Restaurant Name</th>
@@ -41,8 +24,11 @@
 			<th>Free delivery price</th>
 			<th>Blik number</th>
 		</tr>
+		</thead>
+
+		<tbody>
 		<tr>
-			<td>@Service.Order.Id</td>
+			<td><b>@Service.Order.Id</b></td>
 			<td>@Service.Order.RestaurantName</td>
 			<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
 			<td>@Service.Order.MinPrice</td>
@@ -50,11 +36,13 @@
 			<td>@Service.Order.FreeDeliveryPrice</td>
 			<td>@Service.Order.BLIKNumber</td>
 		</tr>
+		</tbody>
 	</table>
 
 	<h1 style="text-align:center">Edit Dish</h1>
 
-	<table style="width:100%">
+	<table class="table table-striped table-bordered" style="width:100%">
+		<thead class="thead-dark">
 		<tr>
 			<th>Id</th>
 			<th>Description</th>
@@ -62,14 +50,17 @@
 			<th>Price</th>
 			<th>UserId</th>
 		</tr>
+		</thead>
 
+		<tbody>
 		<tr>
-			<td>@service.dish.Id</td>
+			<td><b>@service.dish.Id</b></td>
 			<td>@service.dish.Description</td>
 			<td>@service.dish.Extras</td>
 			<td>@service.dish.Price</td>
 			<td>@service.dish.UserId</td>
 		</tr>
+		</tbody>
 	</table>
 
 	<input placeholder="Description" @bind="Description" />
