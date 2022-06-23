@@ -1,0 +1,127 @@
+﻿@using FoodTeams.Entities
+@using FoodTeams.Services
+@inject OrderService service
+@inject NavigationManager UriHelper
+
+
+
+<form>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=_e.Value.ToString())" value="@service.Order.RestaurantName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+</form>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@service.Order.MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@service.Order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<button style="display: block;margin: 0 auto;"
+		class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
+	Confirm
+</button>
+
+
+@code {
+	
+	public void UpdateOrder(Order order)
+	{
+		GetOrder(order);
+		service.UpdateOrder(order);
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+
+	public void GetOrder(Order order)
+	{
+		order.RestaurantName = RestaurantName;
+		order.MenuLink = MenuLink;
+		order.MinPrice = MinPrice;
+		order.DeliveryPrice = DeliveryPrice;
+		order.FreeDeliveryPrice = FreeDeliveryPrice;
+		order.BLIKNumber = BLIKNumber;
+		order.CreateDate = DateTime.Now;
+		order.IsActive = true;
+	}
+	[Parameter]
+	public string RestaurantName { get; set; }
+	[Parameter]
+	public string MenuLink { get; set; }
+	[Parameter]
+	public decimal MinPrice { get; set; } 
+	[Parameter]
+	public decimal DeliveryPrice { get; set; }
+	[Parameter]
+	public decimal FreeDeliveryPrice { get; set; }
+	[Parameter]
+	public long BLIKNumber { get; set; }
+
+
+	public string SetName(string name)
+	{
+		RestaurantName = name;
+		return name;
+	}
+
+	public string SetMenuLink(string link)
+	{
+		MenuLink = link;
+		return link;
+	}
+
+	public decimal SetMinPrice(decimal minPrice)
+	{
+		MinPrice = minPrice;
+		return minPrice;
+	}
+
+	public decimal SetDeliveryPrice(decimal deliveryPrice)
+	{
+		DeliveryPrice = deliveryPrice;
+		return deliveryPrice;
+	}
+
+	public decimal SetFreeDeliveryPrice(decimal freeDeliveryPrice)
+	{
+		FreeDeliveryPrice = freeDeliveryPrice;
+		return freeDeliveryPrice;
+	}
+
+	public long SetBLIKNumber(long blikNumber)
+	{
+		BLIKNumber = blikNumber;
+		return BLIKNumber;
+	}
+}

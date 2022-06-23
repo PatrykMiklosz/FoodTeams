@@ -6,54 +6,14 @@
 
 <h1 class="display-3 mb-10" style=" text-align:center">Edit Order</h1>
 
-<form>
-	<div class="input-group mb-3">
-		<div class="input-group-prepend">
-			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
-		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=_e.Value.ToString())" value="@service.Order.RestaurantName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-	</div>
-</form>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@SetMenuLink(@service.Order.MenuLink)" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
-	</div>
-	<input value="@SetMinPrice(@service.Order.MinPrice)" @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@SetDeliveryPrice(service.Order.DeliveryPrice)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@SetFreeDeliveryPrice(service.Order.FreeDeliveryPrice)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@SetBLIKNumber(service.Order.BLIKNumber)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<button style="display: block;margin: 0 auto;"
-		class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
-	Confirm
-</button>
+<EditOrderForm
+	RestaurantName="@service.Order.RestaurantName"
+	MenuLink="@service.Order.MenuLink"
+	MinPrice="@service.Order.MinPrice"
+	DeliveryPrice="@service.Order.DeliveryPrice"
+	FreeDeliveryPrice="@service.Order.FreeDeliveryPrice"
+	BLIKNumber="@service.Order.BLIKNumber">
+</EditOrderForm>
 
 
 <button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
@@ -71,67 +31,6 @@
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 
-	public void UpdateOrder(Order order)
-	{
-		GetOrder(order);
-		service.UpdateOrder(order);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
-	}
-
-	public void GetOrder(Order order)
-	{
-		order.RestaurantName = RestaurantName;
-		order.MenuLink = MenuLink;
-		order.MinPrice = MinPrice;
-		order.DeliveryPrice = DeliveryPrice;
-		order.FreeDeliveryPrice = FreeDeliveryPrice;
-		order.BLIKNumber = BLIKNumber;
-		order.CreateDate = DateTime.Now;
-		order.IsActive = true;
-	}
-	public string RestaurantName { get; set; }
-	public string MenuLink { get; set; }
-	public decimal MinPrice { get; set; } 
-	public decimal DeliveryPrice { get; set; }
-	public decimal FreeDeliveryPrice { get; set; }
-	public long BLIKNumber { get; set; }
-
-
-	public string SetName(string name)
-	{
-		RestaurantName = name;
-		return name;
-	}
-
-	public string SetMenuLink(string link)
-	{
-		MenuLink = link;
-		return link;
-	}
-
-	public decimal SetMinPrice(decimal minPrice)
-	{
-		MinPrice = minPrice;
-		return minPrice;
-	}
-
-	public decimal SetDeliveryPrice(decimal deliveryPrice)
-	{
-		DeliveryPrice = deliveryPrice;
-		return deliveryPrice;
-	}
-
-	public decimal SetFreeDeliveryPrice(decimal freeDeliveryPrice)
-	{
-		FreeDeliveryPrice = freeDeliveryPrice;
-		return freeDeliveryPrice;
-	}
-
-	public long SetBLIKNumber(long blikNumber)
-	{
-		BLIKNumber = blikNumber;
-		return BLIKNumber;
-	}
 
 
 }
