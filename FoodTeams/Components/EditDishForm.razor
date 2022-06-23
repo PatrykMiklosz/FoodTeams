@@ -1,0 +1,58 @@
+﻿@using FoodTeams.Services
+@inject DishService service
+@inject OrderService Service
+@inject NavigationManager UriHelper
+
+
+<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>Description=_e.Value.ToString())" value="@service.dish.Description" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Extras</span>
+		</div>
+		<input placeholder="Extras" @bind="Extras" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+		</div>
+		<input placeholder="Price" @bind="Price" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">User Id</span>
+		</div>
+		<input placeholder="User Id" @bind="UserId" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<br />
+
+	<button style="display: block;margin: 0 auto;"
+			class="btn btn-success" @onclick="()=>UpdateDish()">
+		Edit dish
+	</button>
+
+@code {
+
+	[Parameter]
+	public string Description { get; set; }
+	[Parameter]
+	public string Extras { get; set; }
+	[Parameter]
+	public decimal Price { get; set; }
+	[Parameter]
+	public long UserId { get; set; }
+
+	public void UpdateDish()
+	{
+		service.EditDish(Description, Extras, Price, UserId);
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+}

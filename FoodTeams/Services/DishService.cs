@@ -24,7 +24,7 @@ namespace FoodTeams.Services
 
         public void CreateDish(long id, string description, string extras, decimal price, long userId)
         {
-            var dish = new Dish();
+            //var dish = new Dish();
             dish.OrderId = id;
             dish.Description = description;
             dish.Extras = extras;

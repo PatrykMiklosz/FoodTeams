@@ -43,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFZGl0RGlzaC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/EditDishForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFZGl0RGlzaEZvcm0ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/EditOrder.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xFZGl0T3JkZXIucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -67,8 +71,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xOZXdPcmRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/OrderForm.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xPcmRlckZvcm0ucmF6b3I=
+[C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/NewOrderForm.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xOZXdPcmRlckZvcm0ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PatrykMikłosz/Desktop/FoodTeams/FoodTeams/Components/OrderHistory.razor]

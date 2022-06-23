@@ -69,13 +69,40 @@
 		</tbody>
 	</table>
 
-	<input placeholder="Description" @bind="Description" />
-	<input placeholder="Extras" @bind="Extras" />
-	<label for="Price">Price:</label>
-	<input id="Price" type="number" min="0" placeholder="Price" @bind="Price" />
-	<label for="UserId">User Id:</label>
-	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
-	<button class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">Add dish</button>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+		</div>
+		<input placeholder="Description" @bind="Description" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Extras</span>
+		</div>
+		<input placeholder="Extras" @bind="Extras" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+		</div>
+		<input placeholder="Price" @bind="Price" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">User Id</span>
+		</div>
+		<input placeholder="User Id" @bind="UserId" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<br />
+
+	<button style="display: block;margin: 0 auto;"
+			class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">Add dish
+	</button>
+
 	<br />
 
 	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>

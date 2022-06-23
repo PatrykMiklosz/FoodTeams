@@ -56,7 +56,20 @@
 
 
 @code {
-	
+
+	[Parameter]
+	public string RestaurantName { get; set; }
+	[Parameter]
+	public string MenuLink { get; set; }
+	[Parameter]
+	public decimal MinPrice { get; set; }
+	[Parameter]
+	public decimal DeliveryPrice { get; set; }
+	[Parameter]
+	public decimal FreeDeliveryPrice { get; set; }
+	[Parameter]
+	public long BLIKNumber { get; set; }
+
 	public void UpdateOrder(Order order)
 	{
 		GetOrder(order);
@@ -74,54 +87,5 @@
 		order.BLIKNumber = BLIKNumber;
 		order.CreateDate = DateTime.Now;
 		order.IsActive = true;
-	}
-	[Parameter]
-	public string RestaurantName { get; set; }
-	[Parameter]
-	public string MenuLink { get; set; }
-	[Parameter]
-	public decimal MinPrice { get; set; } 
-	[Parameter]
-	public decimal DeliveryPrice { get; set; }
-	[Parameter]
-	public decimal FreeDeliveryPrice { get; set; }
-	[Parameter]
-	public long BLIKNumber { get; set; }
-
-
-	public string SetName(string name)
-	{
-		RestaurantName = name;
-		return name;
-	}
-
-	public string SetMenuLink(string link)
-	{
-		MenuLink = link;
-		return link;
-	}
-
-	public decimal SetMinPrice(decimal minPrice)
-	{
-		MinPrice = minPrice;
-		return minPrice;
-	}
-
-	public decimal SetDeliveryPrice(decimal deliveryPrice)
-	{
-		DeliveryPrice = deliveryPrice;
-		return deliveryPrice;
-	}
-
-	public decimal SetFreeDeliveryPrice(decimal freeDeliveryPrice)
-	{
-		FreeDeliveryPrice = freeDeliveryPrice;
-		return freeDeliveryPrice;
-	}
-
-	public long SetBLIKNumber(long blikNumber)
-	{
-		BLIKNumber = blikNumber;
-		return BLIKNumber;
 	}
 }

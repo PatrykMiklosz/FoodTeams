@@ -6,36 +6,33 @@
 @inject NavigationManager UriHelper
 
 
-
-
-
 <body>
 
 	<h2 style="text-align:center">ORDER</h2>
 
 	<table class="table table-bordered table-striped" style="width:100%">
 		<thead class="thead-dark">
-		<tr>
-			<th>Id</th>
-			<th>Restaurant Name</th>
-			<th>Menu link</th>
-			<th>Minimal price</th>
-			<th>Delivery price</th>
-			<th>Free delivery price</th>
-			<th>Blik number</th>
-		</tr>
+			<tr>
+				<th>Id</th>
+				<th>Restaurant Name</th>
+				<th>Menu link</th>
+				<th>Minimal price</th>
+				<th>Delivery price</th>
+				<th>Free delivery price</th>
+				<th>Blik number</th>
+			</tr>
 		</thead>
 
 		<tbody>
-		<tr>
-			<td><b>@Service.Order.Id</b></td>
-			<td>@Service.Order.RestaurantName</td>
-			<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
-			<td>@Service.Order.MinPrice</td>
-			<td>@Service.Order.DeliveryPrice</td>
-			<td>@Service.Order.FreeDeliveryPrice</td>
-			<td>@Service.Order.BLIKNumber</td>
-		</tr>
+			<tr>
+				<td><b>@Service.Order.Id</b></td>
+				<td>@Service.Order.RestaurantName</td>
+				<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
+				<td>@Service.Order.MinPrice</td>
+				<td>@Service.Order.DeliveryPrice</td>
+				<td>@Service.Order.FreeDeliveryPrice</td>
+				<td>@Service.Order.BLIKNumber</td>
+			</tr>
 		</tbody>
 	</table>
 
@@ -43,42 +40,40 @@
 
 	<table class="table table-striped table-bordered" style="width:100%">
 		<thead class="thead-dark">
-		<tr>
-			<th>Id</th>
-			<th>Description</th>
-			<th>Extras</th>
-			<th>Price</th>
-			<th>UserId</th>
-		</tr>
+			<tr>
+				<th>Id</th>
+				<th>Description</th>
+				<th>Extras</th>
+				<th>Price</th>
+				<th>UserId</th>
+			</tr>
 		</thead>
 
 		<tbody>
-		<tr>
-			<td><b>@service.dish.Id</b></td>
-			<td>@service.dish.Description</td>
-			<td>@service.dish.Extras</td>
-			<td>@service.dish.Price</td>
-			<td>@service.dish.UserId</td>
-		</tr>
+			<tr>
+				<td><b>@service.dish.Id</b></td>
+				<td>@service.dish.Description</td>
+				<td>@service.dish.Extras</td>
+				<td>@service.dish.Price</td>
+				<td>@service.dish.UserId</td>
+			</tr>
 		</tbody>
 	</table>
 
-	<input placeholder="Description" @bind="Description" />
-	<input placeholder="Extras" @bind="Extras" />
-	<label for="Price">Price:</label>
-	<input id="Price" type="number" min="0" placeholder="Price" @bind="Price" />
-	<label for="UserId">User Id:</label>
-	<input id="UserId" type="number" min="0" placeholder="UserId" @bind="UserId" />
-	<button class="btn btn-success" @onclick="()=>UpdateDish()">Edit dish</button>
+
+<EditDishForm
+	Description="@service.dish.Description"
+	Extras="@service.dish.Extras"
+	Price="@service.dish.Price"
+	UserId="@service.dish.UserId"
+></EditDishForm>
 
 	<br />
 
 	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
 	<button class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
+
 </body>
-
-
-
 
 @code {
 
@@ -87,20 +82,8 @@
 		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
-	
 	public void NavigateToMainMenu()
 	{
 		UriHelper.NavigateTo("/Welcome");
 	}
-
-	public void UpdateDish()
-	{
-		service.EditDish(Description, Extras, Price, UserId);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
-	}
-	public string Description { get; set; }
-	public string Extras { get; set; }
-	public decimal Price { get; set; }
-	public long UserId { get; set; }
-
 }
