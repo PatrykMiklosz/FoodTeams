@@ -8,7 +8,7 @@
 
 
 <h1 class="display-3 mb-10" style="text-align:center">Active Orders</h1>
-
+<br />
 
 
 <body>
@@ -67,6 +67,11 @@
 
 	public bool DeleteDialogOpen { get; set; }
 
+	public void NavigateToPrevious()
+	{
+		UriHelper.NavigateTo("/Welcome");
+	}
+
 	public void EditOrder(long id)
 	{
 		service.EditOrder(id);
@@ -88,11 +93,6 @@
 	{
 		Service.GetDishes(id);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
-	}
-
-	public void NavigateToPrevious()
-	{
-		UriHelper.NavigateTo("/Welcome");
 	}
 
 	private void OnDeleteDialogClose(bool accepted)
