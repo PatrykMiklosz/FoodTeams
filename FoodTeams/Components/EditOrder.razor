@@ -4,24 +4,61 @@
 @inject OrderService service
 @inject NavigationManager UriHelper
 
-<h1 style=" text-align:center">Edit Order</h1>
+<h1 class="display-3 mb-10" style=" text-align:center">Edit Order</h1>
 
-<input placeholder="@service.Order.RestaurantName" @bind="RestaurantName" />
-<input placeholder="service.Order.MenuLink" @bind="MenuLink" />
-<label for="MinPrice">service.Order.Minimal price:</label>
-<input id="MinPrice" type="number" min="0" placeholder="service.Order.MinPrice" @bind="MinPrice" />
-<label for="DeliveryPrice">Delivery price:</label>
-<input id="DeliveryPrice" type="number" min="0" placeholder="service.Order.DeliveryPrice" @bind="DeliveryPrice" />
-<label for="service.Order.FreeDeliveryPrice">Free delivery price:</label>
-<input id="FreeDeliveryPrice" type="number" min="0" placeholder="service.Order.FreeDeliveryPrice" @bind="FreeDeliveryPrice" />
-<br />
-<label for="BLIKNumber">BLIK number:</label>
-<input id="BLIKNumber" type="number" min="0" placeholder="BLIKNumber" @bind="BLIKNumber" />
+<form>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=_e.Value.ToString())" value="@service.Order.RestaurantName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+</form>
 
-<button class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">Confirm</button>
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@SetMenuLink(@service.Order.MenuLink)" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
+	</div>
+	<input value="@SetMinPrice(@service.Order.MinPrice)" @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@SetDeliveryPrice(service.Order.DeliveryPrice)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@SetFreeDeliveryPrice(service.Order.FreeDeliveryPrice)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<div class="input-group mb-3">
+	<div class="input-group-prepend">
+		<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
+	</div>
+	<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@SetBLIKNumber(service.Order.BLIKNumber)" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+</div>
+
+<button style="display: block;margin: 0 auto;"
+		class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
+	Confirm
+</button>
+
 
 <button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
 <button class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
+
 @code {
 
 	public void NavigateToMainMenu()
@@ -54,9 +91,47 @@
 	}
 	public string RestaurantName { get; set; }
 	public string MenuLink { get; set; }
-	public decimal MinPrice { get; set; }
+	public decimal MinPrice { get; set; } 
 	public decimal DeliveryPrice { get; set; }
 	public decimal FreeDeliveryPrice { get; set; }
 	public long BLIKNumber { get; set; }
+
+
+	public string SetName(string name)
+	{
+		RestaurantName = name;
+		return name;
+	}
+
+	public string SetMenuLink(string link)
+	{
+		MenuLink = link;
+		return link;
+	}
+
+	public decimal SetMinPrice(decimal minPrice)
+	{
+		MinPrice = minPrice;
+		return minPrice;
+	}
+
+	public decimal SetDeliveryPrice(decimal deliveryPrice)
+	{
+		DeliveryPrice = deliveryPrice;
+		return deliveryPrice;
+	}
+
+	public decimal SetFreeDeliveryPrice(decimal freeDeliveryPrice)
+	{
+		FreeDeliveryPrice = freeDeliveryPrice;
+		return freeDeliveryPrice;
+	}
+
+	public long SetBLIKNumber(long blikNumber)
+	{
+		BLIKNumber = blikNumber;
+		return BLIKNumber;
+	}
+
 
 }
