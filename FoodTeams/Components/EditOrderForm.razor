@@ -10,49 +10,49 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=_e.Value.ToString())" value="@service.Order.RestaurantName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=SetName(_e.Value.ToString()))" value="@service.Order.RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@service.Order.MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
+		</div>
+		<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@service.Order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	</div>
+
+	<button style="display: block;margin: 0 auto;"
+			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
+		Confirm
+	</button>
 </form>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@service.Order.MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
-	</div>
-	<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@service.Order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
-
-<button style="display: block;margin: 0 auto;"
-		class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
-	Confirm
-</button>
 
 
 @code {
@@ -87,5 +87,14 @@
 		order.BLIKNumber = BLIKNumber;
 		order.CreateDate = DateTime.Now;
 		order.IsActive = true;
+	}
+
+	public string SetName(string name)
+	{
+		if (name == "")
+		{
+			return RestaurantName;
+		}
+		return name;
 	}
 }

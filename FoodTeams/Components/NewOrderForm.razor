@@ -3,12 +3,12 @@
 @inject OrderService service
 @inject NavigationManager UriHelper
 
-
+<form>
 <div class="input-group mb-3">
 	<div class="input-group-prepend">
 		<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
 	</div>
-	<input placeholder="Restaurant Name" @bind="RestaurantName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+	<input placeholder="Restaurant Name" @bind="RestaurantName" type="text" required class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 </div>
 
 <div class="input-group mb-3">
@@ -46,10 +46,11 @@
 	<input placeholder="BLIKnumber" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 </div>
 
+</form>
 <button style="display: block;margin: 0 auto;"
-		class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">
-	Create Order
+		class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">Create Order
 </button>
+
 
 @code {
 	public string RestaurantName { get; set; }
@@ -61,6 +62,10 @@
 
 	public void CreateNewOrder(Order order)
 	{
+		if(RestaurantName == null)
+		{
+			return;
+		}
 		GetOrder(order);
 		service.CreateOrder(order);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
