@@ -20,12 +20,27 @@
 }
 else
 {
+	<style>
+		body {
+			background-image: url('Food.png');
+		}
+	</style>
+
 	<div class="welcome page">
+
 		<div class="narrow page-padding">
-			<img src="FOOD.png" />
-			<h1 class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Accent" @onclick="NavigateToNewOrder">New order</FluentButton></h1>
-			<p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToActiveOrders">Active orders</FluentButton></p>
-			<p class="center"><FluentButton style="height:70px; width:500px;margin:30px" Appearance="Appearance.Neutral" @onclick="NavigateToOrderHistory">Order history</FluentButton></p>
+			<br>
+			<br>
+			<br>
+			<button type="button" class="block" @onclick="NavigateToNewOrder"><strong>New order</strong></button>
+			<br>
+			<br>
+			<br>
+			<button type="button" class="block" @onclick="NavigateToActiveOrders"><strong>Active orders</strong></button>
+			<br>
+			<br>
+			<br>
+			<button type="button" class="block" @onclick="NavigateToOrderHistory"><strong>Order history</strong></button>
 		</div>
 	</div>
 }
