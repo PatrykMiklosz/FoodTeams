@@ -4,52 +4,53 @@
 @inject NavigationManager UriHelper
 
 <form>
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
+		</div>
+		<input placeholder="Restaurant Name" @bind="RestaurantName" type="text" required = "required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="Restaurant Name" @bind="RestaurantName" type="text" required class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
+		</div>
+		<input placeholder="MenuLink" @bind="MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="MenuLink" @bind="MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
+		</div>
+		<input placeholder="Minimal Price" @bind="MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="Minimal Price" @bind="MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
+		</div>
+		<input placeholder="DeliveryPrice" @bind="DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="DeliveryPrice" @bind="DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
+		</div>
+		<input placeholder="FreeDeliveryPrice" @bind="FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="FreeDeliveryPrice" @bind="FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
-<div class="input-group mb-3">
-	<div class="input-group-prepend">
-		<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
+	<div class="input-group mb-3">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
+		</div>
+		<input placeholder="BLIKnumber" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-	<input placeholder="BLIKnumber" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-</div>
 
+
+	<button type="button" style="display: block;margin: 0 auto;"
+			class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">Create Order
+	</button>
 </form>
-<button style="display: block;margin: 0 auto;"
-		class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">Create Order
-</button>
 
 
 @code {
@@ -59,16 +60,22 @@
 	public decimal DeliveryPrice { get; set; }
 	public decimal FreeDeliveryPrice { get; set; }
 	public long BLIKNumber { get; set; }
+	Order neworder = new Order();
+
+	public void Navigate()
+	{
+		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
 
 	public void CreateNewOrder(Order order)
 	{
-		if(RestaurantName == null)
+		if (RestaurantName == null)
 		{
 			return;
 		}
 		GetOrder(order);
 		service.CreateOrder(order);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		Navigate();
 	}
 
 	public void GetOrder(Order order)
@@ -83,5 +90,5 @@
 		order.IsActive = true;
 	}
 
-	Order neworder = new Order();
+	
 }

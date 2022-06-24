@@ -48,7 +48,7 @@
 		<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@service.Order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
-	<button style="display: block;margin: 0 auto;"
+	<button type="button" style="display: block;margin: 0 auto;"
 			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
 		Confirm
 	</button>
