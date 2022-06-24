@@ -3,7 +3,7 @@
 @inject OrderService service
 @inject NavigationManager UriHelper
 
-<form>
+<form method="post">
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
@@ -46,12 +46,19 @@
 		<input placeholder="BLIKnumber" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
-
 	<button type="button" style="display: block;margin: 0 auto;"
 			class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">Create Order
 	</button>
+
 </form>
 
+@if (DeleteDialogOpen)
+{
+	<ModalDialog Title="ERROR"
+			 Text="Please fill out Restaurant name field"
+			 OnClose="@OnDeleteDialogClose">
+	</ModalDialog>
+}
 
 @code {
 	public string RestaurantName { get; set; }
@@ -61,21 +68,23 @@
 	public decimal FreeDeliveryPrice { get; set; }
 	public long BLIKNumber { get; set; }
 	Order neworder = new Order();
+	public bool DeleteDialogOpen { get; set; } = false;
 
 	public void Navigate()
 	{
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		
 	}
 
 	public void CreateNewOrder(Order order)
 	{
 		if (RestaurantName == null)
 		{
+			OpenDeleteDialog();
 			return;
 		}
 		GetOrder(order);
 		service.CreateOrder(order);
-		Navigate();
+		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
 	public void GetOrder(Order order)
@@ -90,5 +99,17 @@
 		order.IsActive = true;
 	}
 
+	private void OpenDeleteDialog()
+	{
+		DeleteDialogOpen = true;
+		StateHasChanged();
+	}
+
+	private void OnDeleteDialogClose(bool accepted)
+	{
+		StateHasChanged();
+		DeleteDialogOpen = false;
+		StateHasChanged();
+	}
 	
 }
