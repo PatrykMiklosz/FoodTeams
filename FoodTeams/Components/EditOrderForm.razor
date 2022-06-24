@@ -10,50 +10,56 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>RestaurantName=SetName(_e.Value.ToString()))" value="@service.Order.RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Restaurant name" @bind="RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>MenuLink=_e.Value.ToString())" value="@service.Order.MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Menu link" @bind ="MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>MinPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Minimal price" @bind="MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>DeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Delivery price" @bind="DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>FreeDeliveryPrice=decimal.Parse(_e.Value.ToString()))" value="@service.Order.FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Free delivery price" @bind="FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>BLIKNumber=long.Parse(_e.Value.ToString()))" value="@service.Order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="BLIK number" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<button type="button" style="display: block;margin: 0 auto;"
-			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">
-		Confirm
+			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">Confirm
 	</button>
 </form>
 
+@if (CreateDialogOpen)
+{
+	<ModalDialog Title="Error"
+			 Text="Please fill out Restaurant Name field"
+			 OnClose="@OnCreateDialogClose">
+	</ModalDialog>
+}
 
 @code {
 
@@ -69,12 +75,18 @@
 	public decimal FreeDeliveryPrice { get; set; }
 	[Parameter]
 	public long BLIKNumber { get; set; }
+	public bool CreateDialogOpen { get; set; } = false;
 
 	public void UpdateOrder(Order order)
 	{
+		if(string.IsNullOrWhiteSpace(RestaurantName))
+		{
+			OpenCreateDialog();
+			return;
+		}
 		GetOrder(order);
 		service.UpdateOrder(order);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		UriHelper.NavigateTo("/ActiveOrders");
 	}
 
 	public void GetOrder(Order order)
@@ -89,12 +101,15 @@
 		order.IsActive = true;
 	}
 
-	public string SetName(string name)
+	private void OpenCreateDialog()
 	{
-		if (name == "")
-		{
-			return RestaurantName;
-		}
-		return name;
+		CreateDialogOpen = true;
+		StateHasChanged();
+	}
+
+	private void OnCreateDialogClose()
+	{
+		CreateDialogOpen = false;
+		StateHasChanged();
 	}
 }

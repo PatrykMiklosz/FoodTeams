@@ -33,7 +33,7 @@
 				<tr>
 					<td><b>@order.Id</b></td>
 					<td>@order.RestaurantName</td>
-					<td><a href="@order.MenuLink" target="_blank">Click</a></td>
+					<td><a href="@order.MenuLink" target="_blank">@order.MenuLink</a></td>
 					<td>@order.MinPrice</td>
 					<td>@order.DeliveryPrice</td>
 					<td>@order.FreeDeliveryPrice</td>
@@ -53,7 +53,7 @@
 		</tbody>
 	</table>
 
-	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+	<button style="position: fixed; top: 10px; left: 10px" class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
 
 </body>
 @if (DeleteDialogOpen)

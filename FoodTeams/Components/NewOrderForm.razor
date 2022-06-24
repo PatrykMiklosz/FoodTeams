@@ -52,11 +52,11 @@
 
 </form>
 
-@if (DeleteDialogOpen)
+@if (CreateDialogOpen)
 {
 	<ModalDialog Title="ERROR"
 			 Text="Please fill out Restaurant name field"
-			 OnClose="@OnDeleteDialogClose">
+			 OnClose="@OnCreaeDialogClose">
 	</ModalDialog>
 }
 
@@ -68,19 +68,19 @@
 	public decimal FreeDeliveryPrice { get; set; }
 	public long BLIKNumber { get; set; }
 	Order neworder = new Order();
-	public bool DeleteDialogOpen { get; set; } = false;
+	public bool CreateDialogOpen { get; set; } = false;
 
 
 	public void CreateNewOrder(Order order)
 	{
 		if (string.IsNullOrEmpty(RestaurantName))
 		{
-			OpenDeleteDialog();
+			OpenCreateDialog();
 			return;
 		}
 		GetOrder(order);
 		service.CreateOrder(order);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		UriHelper.NavigateTo("/ActiveOrders");
 	}
 
 	public void GetOrder(Order order)
@@ -95,16 +95,16 @@
 		order.IsActive = true;
 	}
 
-	private void OpenDeleteDialog()
+	private void OpenCreateDialog()
 	{
-		DeleteDialogOpen = true;
+		CreateDialogOpen = true;
 		StateHasChanged();
 	}
 
-	private void OnDeleteDialogClose(bool accepted)
+	private void OnCreaeDialogClose(bool accepted)
 	{
 		StateHasChanged();
-		DeleteDialogOpen = false;
+		CreateDialogOpen = false;
 		StateHasChanged();
 	}
 	

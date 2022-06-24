@@ -8,7 +8,7 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Description</span>
 		</div>
-		<input @onchange="@((ChangeEventArgs _e)=>Description=_e.Value.ToString())" value="@service.dish.Description" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Description" @bind="Description" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3">
@@ -39,6 +39,14 @@
 		Edit dish
 	</button>
 
+	@if (CreateDialogOpen)
+{
+	<ModalDialog Title="Error"
+			 Text="Please fill out Description field"
+			 OnClose="@OnCreateDialogClose">
+	</ModalDialog>
+}
+
 @code {
 
 	[Parameter]
@@ -49,10 +57,23 @@
 	public decimal Price { get; set; }
 	[Parameter]
 	public long UserId { get; set; }
+	public bool CreateDialogOpen { get; set; } = false;
 
 	public void UpdateDish()
 	{
+		if(string.IsNullOrWhiteSpace(Description))
+		{
+			CreateDialogOpen = true;
+			StateHasChanged();
+			return;
+		}
 		service.EditDish(Description, Extras, Price, UserId);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
+	}
+
+	public void OnCreateDialogClose()
+	{
+		CreateDialogOpen = false;
+		StateHasChanged();
 	}
 }

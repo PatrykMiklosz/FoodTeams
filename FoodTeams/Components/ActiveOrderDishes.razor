@@ -29,7 +29,7 @@
 			<tr>
 				<td><b>@Service.Order.Id</b></td>
 				<td>@Service.Order.RestaurantName</td>
-				<td><a href="@Service.Order.MenuLink" target="_blank">Click</a></td>
+				<td><a href="@Service.Order.MenuLink" target="_blank">@Service.Order.MenuLink</a></td>
 				<td>@Service.Order.MinPrice</td>
 				<td>@Service.Order.DeliveryPrice</td>
 				<td>@Service.Order.FreeDeliveryPrice</td>
@@ -109,8 +109,8 @@
 
 	<br />
 
-	<button class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
-	<button class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
+	<button style="position: fixed; top: 10px; left: 10px" class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+	<button style="position: fixed; top: 10px; left: 80px" class="btn btn-info" @onclick="NavigateToMainMenu">Main menu</button>
 
 </body>
 
