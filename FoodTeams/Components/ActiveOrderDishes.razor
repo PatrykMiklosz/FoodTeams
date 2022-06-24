@@ -122,6 +122,14 @@
 	</ModalDialog>
 }
 
+@if (CreateDialogOpen)
+{
+	<ModalDialog Title="Error"
+			 Text="Please fill out Description field"
+			 OnClose="@OnCreateDialogClose">
+	</ModalDialog>
+}
+
 @code {
 
 	public string Description { get; set; }
@@ -129,6 +137,7 @@
 	public decimal Price { get; set; }
 	public long UserId { get; set; }
 	public bool DeleteDialogOpen { get; set; } = false;
+	public bool CreateDialogOpen { get; set; } = false;
 
 	public void NavigateToMainMenu()
 	{
@@ -143,6 +152,11 @@
 
 	public void AddNewDish(long id)
 	{
+		if(string.IsNullOrWhiteSpace(Description))
+		{
+			OpenCreateDialog();
+			return;
+		}
 		service.CreateDish(id, Description, Extras, Price, UserId);
 		service.GetDishes(id);
 		StateHasChanged();
@@ -177,6 +191,19 @@
 		}
 
 		DeleteDialogOpen = false;
+		StateHasChanged();
+	}
+
+	public void OpenCreateDialog()
+	{
+		StateHasChanged();
+		CreateDialogOpen = true;
+		StateHasChanged();
+	}
+
+	public void OnCreateDialogClose()
+	{
+		CreateDialogOpen = false;
 		StateHasChanged();
 	}
 

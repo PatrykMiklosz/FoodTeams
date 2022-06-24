@@ -70,14 +70,10 @@
 	Order neworder = new Order();
 	public bool DeleteDialogOpen { get; set; } = false;
 
-	public void Navigate()
-	{
-		
-	}
 
 	public void CreateNewOrder(Order order)
 	{
-		if (RestaurantName == null)
+		if (string.IsNullOrEmpty(RestaurantName))
 		{
 			OpenDeleteDialog();
 			return;
