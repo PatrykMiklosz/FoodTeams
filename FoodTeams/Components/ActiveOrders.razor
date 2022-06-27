@@ -45,8 +45,6 @@
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
 						<span></span>
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
-						<span></span>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>GetReceipt(order)">receipt</button>
 					</td>
 				</tr>
 			}
@@ -118,12 +116,7 @@
 		StateHasChanged();
 	}
 
-	public void GetReceipt(Order order)
-	{
-		Service.GetDishes(order.Id);
-		service.GetReceipt(order);
-		UriHelper.NavigateTo("/receipt");
-	}
+
 
 }
 

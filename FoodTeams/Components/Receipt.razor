@@ -3,6 +3,32 @@
 @inject OrderService service
 @inject NavigationManager UriHelper
 
+<h1 class="display-3 mb-10" style="text-align:center">ORDER</h1>
+
+<table class="table table-bordered" style="background-color:#eeeeee; width:90%; position:center; margin-right:auto; margin-left:auto">
+	<thead class="thead-dark">
+		<tr>
+			<th>Id</th>
+			<th>Restaurant Name</th>
+			<th>Menu link</th>
+			<th>Minimal price</th>
+			<th>Delivery price</th>
+			<th>Free delivery price</th>
+			<th>Blik number</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><b>@service.Order.Id</b></td>
+			<td>@service.Order.RestaurantName</td>
+			<td><a href="@service.Order.MenuLink" target="_blank">Click</a></td>
+			<td>@service.Order.MinPrice</td>
+			<td>@service.Order.DeliveryPrice</td>
+			<td>@service.Order.FreeDeliveryPrice</td>
+			<td>@service.Order.BLIKNumber</td>
+		</tr>
+	</tbody>
+</table>
 <h1 class="display-3 mb-10" style="text-align:center">Receipt</h1>
 
 <br />
@@ -19,18 +45,18 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(var dish in service.Order.Dishes)
+		@foreach (var dish in service.Order.Dishes)
 		{
-		<tr>
-			<td><b>@dish.Id</b></td>
-			<td>@dish.Description</td>
-			<td>@dish.Extras</td>
-			<td>@dish.Price</td>
-			<td></td>
-			<td>@dish.UserId</td>
-		</tr>	
+			<tr>
+				<td><b>@dish.Id</b></td>
+				<td>@dish.Description</td>
+				<td>@dish.Extras</td>
+				<td>@dish.Price</td>
+				<td></td>
+				<td>@dish.UserId</td>
+			</tr>
 		}
-		
+
 		<tr style="text-align:right; font-weight:bold">
 			<td colspan="6">Total price: @service.GetReceipt(service.Order)</td>
 		</tr>
@@ -50,6 +76,6 @@
 
 	public void NavigateToPrevious()
 	{
-		UriHelper.NavigateTo("/ActiveOrders");
+		UriHelper.NavigateTo("/OrderHistory");
 	}
 }
