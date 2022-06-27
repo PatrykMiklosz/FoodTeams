@@ -36,11 +36,11 @@ else
 			<br>
 			<br>
 			<br>
-			<button type="button" class="block" @onclick="NavigateToActiveOrders"><strong>Active orders</strong></button>
+			<button type="button" class="block" @onclick="NavigateToActiveOrders"><strong>Active orders(@Service.ActiveOrdersCount())</strong></button>
 			<br>
 			<br>
 			<br>
-			<button type="button" class="block" @onclick="NavigateToOrderHistory"><strong>Order history</strong></button>
+			<button type="button" class="block" @onclick="NavigateToOrderHistory"><strong>Order history(@Service.OrdersCount())</strong></button>
 		</div>
 	</div>
 }

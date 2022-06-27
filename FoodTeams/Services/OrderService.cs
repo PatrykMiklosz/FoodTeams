@@ -8,6 +8,8 @@ namespace FoodTeams.Services
         public List<Order> Orders { get; set; }
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
+        public int ActiveOrders { get; set; }
+        public int OrderHistory { get; set; }
 
         public OrderService(FoodTeamsDbContext dbContext)
         {
@@ -68,6 +70,16 @@ namespace FoodTeams.Services
             Order.CreateDate = DateTime.Now;
             Order.IsActive = true;
             dbContext.SaveChanges();
+        }
+
+        public int ActiveOrdersCount()
+        {
+            return dbContext.Orders.Where(x=>x.IsActive==true).Count();
+        }
+
+        public int OrdersCount()
+        {
+            return dbContext.Orders.Where(x => x.IsActive == false).Count();
         }
     }
 }
