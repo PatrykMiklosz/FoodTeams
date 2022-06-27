@@ -56,8 +56,7 @@ namespace FoodTeams.Services
 
         public void EditOrder(long id)
         {
-            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
-            Order = order;
+            Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public void UpdateOrder(Order order)

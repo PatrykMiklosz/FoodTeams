@@ -48,7 +48,7 @@
 					</td>
 				</tr>
 				<tr style="text-align:right; font-weight:bold">
-					<td colspan="6" style="background-color:white">To reach the minimum price: @GetMinimalOrderPrice(order)</td>
+					<td colspan="6" style="background-color:white">To reach the minimum price: @(service.GetMinimalOrderPrice(order))</td>
 					<td colspan="2" style="background-color:white">To reach the free delivery price: @(service.GetFreeDeliveryOrderPrice(order))</td>
 				</tr>
 			}
