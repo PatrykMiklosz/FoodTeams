@@ -12,7 +12,7 @@
 
 
 <body>
-	<table class="table table-bordered" style="background-color:#eeeeee">
+	<table class="table table-bordered" style="background-color:#eeeeee; width:90%; position:center; margin-right:auto; margin-left:auto">
 		<thead class="thead-dark">
 			<tr>
 				<th>Id</th>
@@ -22,7 +22,6 @@
 				<th>Delivery price</th>
 				<th>Free delivery price</th>
 				<th>Blik number</th>
-				<th>Dishes</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -40,13 +39,14 @@
 					<td>@order.BLIKNumber</td>
 					<td>
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>ShowDishes(order.Id)">fastfood</button>
-					</td>
-					<td>
+						<span></span>
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>CompleteOrder(order.Id)">done</button>
 						<span></span>
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
 						<span></span>
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
+						<span></span>
+						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>GetReceipt(order)">receipt</button>
 					</td>
 				</tr>
 			}
@@ -56,6 +56,8 @@
 	<button style="position: fixed; top: 10px; left: 10px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToPrevious">arrow_back</button>
 
 </body>
+
+
 @if (DeleteDialogOpen)
 {
 	<ModalDialog Title="Are you sure?"
@@ -63,9 +65,11 @@
 			 OnClose="@OnDeleteDialogClose">
 	</ModalDialog>
 }
+
 @code {
 
 	public bool DeleteDialogOpen { get; set; }
+	public bool ReceiptDialogOpen { get; set; }
 
 	public void NavigateToPrevious()
 	{
@@ -113,4 +117,13 @@
 		service.Order = order;
 		StateHasChanged();
 	}
+
+	public void GetReceipt(Order order)
+	{
+		Service.GetDishes(order.Id);
+		service.GetReceipt(order);
+		UriHelper.NavigateTo("/receipt");
+	}
+
 }
+

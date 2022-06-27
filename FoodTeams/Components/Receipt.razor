@@ -1,0 +1,55 @@
+﻿@page "/receipt"
+@using FoodTeams.Services
+@inject OrderService service
+@inject NavigationManager UriHelper
+
+<h1 class="display-3 mb-10" style="text-align:center">Receipt</h1>
+
+<br />
+
+<table class="table table-bordered" style="background-color:#eeeeee; width:90%; position:center; margin-right:auto; margin-left:auto">
+	<thead class="thead-dark">
+		<tr>
+			<th>Id</th>
+			<th>Description</th>
+			<th>Extras</th>
+			<th>Price</th>
+			<th>Delivery price</th>
+			<th>User id</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var dish in service.Order.Dishes)
+		{
+		<tr>
+			<td><b>@dish.Id</b></td>
+			<td>@dish.Description</td>
+			<td>@dish.Extras</td>
+			<td>@dish.Price</td>
+			<td></td>
+			<td>@dish.UserId</td>
+		</tr>	
+		}
+		
+		<tr style="text-align:right; font-weight:bold">
+			<td colspan="6">Total price: @service.GetReceipt(service.Order)</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<button style="position: fixed; top: 10px; left: 10px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToPrevious">arrow_back</button>
+<button style="position: fixed; top: 10px; left: 60px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToMainMenu">home</button>
+@code {
+
+	public void NavigateToMainMenu()
+	{
+		UriHelper.NavigateTo("/Welcome");
+	}
+
+	public void NavigateToPrevious()
+	{
+		UriHelper.NavigateTo("/ActiveOrders");
+	}
+}

@@ -81,5 +81,21 @@ namespace FoodTeams.Services
         {
             return dbContext.Orders.Where(x => x.IsActive == false).Count();
         }
+
+        public decimal GetReceipt(Order order)
+        {
+            decimal receipt = 0;
+            foreach(var dish in Order.Dishes)
+            {
+                receipt += dish.Price;
+            }
+            return receipt;
+        }
+
+        //public int CountOrderUsers()
+        //{
+        //    var users = 0;
+        //    Order.Dishes.
+        //}
     }
 }
