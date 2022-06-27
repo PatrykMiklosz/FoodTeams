@@ -12,7 +12,7 @@
 
 
 <body>
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered" style="background-color:#eeeeee">
 		<thead class="thead-dark">
 			<tr>
 				<th>Id</th>
@@ -39,21 +39,21 @@
 					<td>@order.FreeDeliveryPrice</td>
 					<td>@order.BLIKNumber</td>
 					<td>
-						<button class="btn btn-secondary" @onclick="()=>ShowDishes(order.Id)">Add / Edit / Delete </button>
+						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>ShowDishes(order.Id)">fastfood</button>
 					</td>
 					<td>
-						<button class="material-icons" style="border:none" @onclick="()=>CompleteOrder(order.Id)">done</button>
+						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>CompleteOrder(order.Id)">done</button>
 						<span></span>
-						<button class="material-icons" style="border:none" @onclick="()=>EditOrder(order.Id)">edit</button>
+						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
 						<span></span>
-						<button class="material-icons" style="border:none" @onclick="()=>OpenDeleteDialog(order)">delete</button>
+						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 
-	<button style="position: fixed; top: 10px; left: 10px" class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+	<button style="position: fixed; top: 10px; left: 10px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToPrevious">arrow_back</button>
 
 </body>
 @if (DeleteDialogOpen)

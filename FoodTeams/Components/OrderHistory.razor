@@ -10,7 +10,7 @@
 
 	<h1 class="display-3 mb-10" style="text-align:center">Order history</h1>
 
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered" style="background-color:#eeeeee">
 		<thead class="thead-dark">
 			<tr>
 				<th>Id</th>
@@ -38,15 +38,15 @@
 					<td>@order.BLIKNumber</td>
 					<td>@order.CreateDate</td>
 					<td>
-						<button class="btn btn-success" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">Restore</button>
-						<button class="btn btn-warning" @onclick="()=>ShowDishes(order.Id)">Show details</button>
+						<button class="material-icons" style="border:none" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">restore</button>
+						<button class="material-icons" style="border:none" @onclick="()=>ShowDishes(order.Id)">info</button>
 					</td>
 				</tr>
 			}
 		</tbody>
 	</table>
 
-	<button style="position:fixed; top:10px; left:10px" class="btn btn-dark" @onclick="NavigateToPrevious">Back</button>
+	<button style="position: fixed; top: 10px; left: 10px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToPrevious">arrow_back</button>
 
 </body>
 
