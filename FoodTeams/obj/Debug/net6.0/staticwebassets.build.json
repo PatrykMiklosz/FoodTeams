@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "F/nkWEKdbl5miNfcQm7Rzw6Hhkvf3e///asv8m0AW5o=",
+  "Hash": "yhl+d71d6pTfQijWzW5COYCAujiSRTekhB3OM7ILJMk=",
   "Source": "FoodTeams",
   "BasePath": "_content/FoodTeams",
   "Mode": "Default",
@@ -304,6 +304,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\open-iconic\\README.md"
+    },
+    {
+      "Identity": "C:\\Users\\PatrykMikłosz\\Desktop\\FoodTeams\\FoodTeams\\wwwroot\\css\\open-iconic\\site.css",
+      "SourceId": "FoodTeams",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PatrykMikłosz\\Desktop\\FoodTeams\\FoodTeams\\wwwroot\\",
+      "BasePath": "_content/FoodTeams",
+      "RelativePath": "css/open-iconic/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\open-iconic\\site.css"
     },
     {
       "Identity": "C:\\Users\\PatrykMikłosz\\Desktop\\FoodTeams\\FoodTeams\\wwwroot\\css\\site.css",
