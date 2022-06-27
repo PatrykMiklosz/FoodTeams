@@ -47,6 +47,10 @@
 						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
 					</td>
 				</tr>
+				<tr style="text-align:right; font-weight:bold">
+					<td colspan="6" style="background-color:white">To reach the minimum price: @GetMinimalOrderPrice(order)</td>
+					<td colspan="2" style="background-color:white">To reach the free delivery price: @(service.GetFreeDeliveryOrderPrice(order))</td>
+				</tr>
 			}
 		</tbody>
 	</table>
@@ -116,6 +120,11 @@
 		StateHasChanged();
 	}
 
+	private decimal GetMinimalOrderPrice(Order order)
+	{
+		Service.GetDishes(order.Id);
+		return service.GetMinimalOrderPrice(order);
+	}
 
 
 }

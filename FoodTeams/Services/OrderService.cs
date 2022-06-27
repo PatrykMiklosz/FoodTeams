@@ -10,6 +10,7 @@ namespace FoodTeams.Services
         public long NewOrderId { get; set; }
         public int ActiveOrders { get; set; }
         public int OrderHistory { get; set; }
+        public decimal OrderCost { get; set; }
 
         public OrderService(FoodTeamsDbContext dbContext)
         {
@@ -90,6 +91,34 @@ namespace FoodTeams.Services
                 receipt += dish.Price;
             }
             return receipt;
+        }
+
+        public decimal GetMinimalOrderPrice(Order order)
+		{
+            decimal orderCost = 0;
+            foreach (var dish in order.Dishes)
+            {
+                orderCost += dish.Price;
+            }
+            if(orderCost-order.MinPrice>=0)
+			{
+                return 0;
+			}
+            return order.MinPrice-orderCost;
+        }
+
+        public decimal GetFreeDeliveryOrderPrice(Order order)
+		{
+            decimal orderCost = 0;
+            foreach (var dish in order.Dishes)
+            {
+                orderCost += dish.Price;
+            }
+            if (orderCost - order.FreeDeliveryPrice >= 0)
+            {
+                return 0;
+            }
+            return order.FreeDeliveryPrice-orderCost;
         }
 
         //public int CountOrderUsers()
