@@ -5,7 +5,7 @@ namespace FoodTeams.Services
     public class OrderService
     {
         private readonly FoodTeamsDbContext dbContext;
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
         public int ActiveOrders { get; set; }
@@ -132,6 +132,11 @@ namespace FoodTeams.Services
                 return cost;
 			}
             return cost + order.DeliveryPrice;
+        }
+
+        public void OrderDescending(List<Order> orders)
+        {
+            Orders = orders.OrderByDescending(x => x.Id).ToList();
         }
 
         //public int CountOrderUsers()

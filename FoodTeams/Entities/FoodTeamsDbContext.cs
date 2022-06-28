@@ -15,16 +15,16 @@ namespace FoodTeams.Entities
             {
                 eb.HasMany(x => x.Dishes).WithOne(y => y.Order);
                 eb.Property(o => o.RestaurantName).IsRequired();
-                eb.Property(o => o.DeliveryPrice).HasColumnType("decimal(5, 2)");
-                eb.Property(o => o.FreeDeliveryPrice).HasColumnType("decimal(5, 2)");
-                eb.Property(o => o.MinPrice).HasColumnType("decimal(5, 2)");
+                eb.Property(o => o.DeliveryPrice).HasColumnType("decimal(25, 2)");
+                eb.Property(o => o.FreeDeliveryPrice).HasColumnType("decimal(25, 2)");
+                eb.Property(o => o.MinPrice).HasColumnType("decimal(25, 2)");
             });
 
             modelBuilder.Entity<Dish>(eb =>
             {
                 eb.Property(d => d.Description).IsRequired();
                 eb.Property(d => d.Price).IsRequired();
-                eb.Property(o => o.Price).HasColumnType("decimal(5, 2)");
+                eb.Property(o => o.Price).HasColumnType("decimal(25, 2)");
             });
 
             modelBuilder.Entity<User>()

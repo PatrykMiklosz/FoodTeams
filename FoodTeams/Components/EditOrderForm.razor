@@ -24,21 +24,21 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
 		</div>
-		<input placeholder="Minimal price" @bind="MinPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Minimal price" @bind="MinPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:90%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
 		</div>
-		<input placeholder="Delivery price" @bind="DeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Delivery price" @bind="DeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:90%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
 		</div>
-		<input placeholder="Free delivery price" @bind="FreeDeliveryPrice" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Free delivery price" @bind="FreeDeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:90%; position:center; margin-right:auto; margin-left:auto">
@@ -48,7 +48,7 @@
 		<input placeholder="BLIK number" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
-	<button type="button" style="display: block; margin: 0 auto; position: center; width: 100px"
+	<button type="button" disabled="@(MinPrice >=1000 || DeliveryPrice >=1000 || FreeDeliveryPrice >=1000)" style="display: block; margin: 0 auto; position: center; width: 100px"
 			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">Confirm
 	</button>
 	<br />
