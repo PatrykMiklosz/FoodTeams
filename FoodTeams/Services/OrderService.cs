@@ -120,6 +120,20 @@ namespace FoodTeams.Services
             return order.FreeDeliveryPrice-orderCost;
         }
 
+        public decimal GetOrderCost(Order order)
+		{
+            decimal cost = 0;
+            foreach (var dish in order.Dishes)
+            {
+                cost += dish.Price;
+            }
+            if(GetFreeDeliveryOrderPrice(order) == 0)
+			{
+                return cost;
+			}
+            return cost + order.DeliveryPrice;
+        }
+
         //public int CountOrderUsers()
         //{
         //    var users = 0;

@@ -21,6 +21,7 @@
 				<th>Minimal price</th>
 				<th>Delivery price</th>
 				<th>Free delivery price</th>
+				<th>Total cost</th>
 				<th>Blik number</th>
 			</tr>
 		</thead>
@@ -33,6 +34,9 @@
 				<td>@Service.Order.MinPrice</td>
 				<td>@Service.Order.DeliveryPrice</td>
 				<td>@Service.Order.FreeDeliveryPrice</td>
+				<td>
+					@Service.GetOrderCost(Service.Order);
+				</td>
 				<td>@Service.Order.BLIKNumber</td>
 			</tr>
 			<tr style="text-align:right; font-weight:bold">
