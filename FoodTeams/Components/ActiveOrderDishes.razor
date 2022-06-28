@@ -35,6 +35,10 @@
 				<td>@Service.Order.FreeDeliveryPrice</td>
 				<td>@Service.Order.BLIKNumber</td>
 			</tr>
+			<tr style="text-align:right; font-weight:bold">
+				<td colspan="6" style="background-color:white">To reach the minimum price: @(Service.GetMinimalOrderPrice(Service.Order))</td>
+				<td colspan="2" style="background-color:white">To reach the free delivery price: @(Service.GetFreeDeliveryOrderPrice(Service.Order))</td>
+			</tr>
 		</tbody>
 	</table>
 
@@ -71,7 +75,7 @@
 		</tbody>
 	</table>
 
-	
+
 	<div class="input-group mb-3" style="width:90%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Description</span>
@@ -104,7 +108,8 @@
 	<br />
 
 	<button style="display: block;margin: 0 auto;"
-			class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">Add dish
+			class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">
+		Add dish
 	</button>
 
 	<br />
@@ -152,7 +157,7 @@
 
 	public void AddNewDish(long id)
 	{
-		if(string.IsNullOrWhiteSpace(Description))
+		if (string.IsNullOrWhiteSpace(Description))
 		{
 			OpenCreateDialog();
 			return;
