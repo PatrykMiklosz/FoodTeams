@@ -33,11 +33,14 @@
 	</div>
 
 	<br />
-
-	<button style="display: block;margin: 0 auto;"
-			class="btn btn-success" @onclick="()=>UpdateDish()">
-		Edit dish
+	<button type="button" style="display: block; margin: 0 auto; position: center; width: 100px"
+			class="btn btn-success" @onclick="()=>UpdateDish()">Confirm
 	</button>
+	<br />
+	<button type="button" style="display: block; margin: 0 auto; position: center; width: 100px"
+			class="btn btn-warning" @onclick="()=>Cancel()">Cancel
+	</button>
+
 
 	@if (CreateDialogOpen)
 {
@@ -75,5 +78,10 @@
 	{
 		CreateDialogOpen = false;
 		StateHasChanged();
+	}
+
+	public void Cancel()
+	{
+		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 }
