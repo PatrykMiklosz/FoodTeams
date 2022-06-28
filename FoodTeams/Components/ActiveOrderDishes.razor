@@ -176,6 +176,7 @@
 
 	public void EditDish(long id)
 	{
+		service.GetDishes(Service.Order.Id);
 		service.UpdateDish(id);
 		UriHelper.NavigateTo("/EditDish");
 	}

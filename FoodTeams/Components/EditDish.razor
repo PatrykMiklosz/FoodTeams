@@ -54,13 +54,16 @@
 		</thead>
 
 		<tbody>
+			@foreach(var dish in Service.Order.Dishes)
+			{
 			<tr>
-				<td><b>@service.dish.Id</b></td>
-				<td>@service.dish.Description</td>
-				<td>@service.dish.Extras</td>
-				<td>@service.dish.Price</td>
-				<td>@service.dish.UserId</td>
+				<td><b>@dish.Id</b></td>
+				<td>@dish.Description</td>
+				<td>@dish.Extras</td>
+				<td>@dish.Price</td>
+				<td>@dish.UserId</td>
 			</tr>
+			}
 		</tbody>
 	</table>
 
