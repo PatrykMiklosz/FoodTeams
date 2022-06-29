@@ -2,8 +2,8 @@
 @inject NavigationManager UriHelper
 @using FoodTeams.Services
 @using Microsoft.AspNetCore.Http.Extensions
-@inject OrderService Service
-@inject DishService service
+@inject OrderService orderService
+@inject DishService dishService
 
 
 
@@ -28,18 +28,18 @@
 
 		<tbody>
 			<tr>
-				<td><b>@Service.Order.Id</b></td>
-				<td>@Service.Order.RestaurantName</td>
-				<td><a href="@Service.Order.MenuLink" target="_blank">@Service.Order.MenuLink</a></td>
-				<td>@Service.Order.MinPrice</td>
-				<td>@Service.Order.DeliveryPrice</td>
-				<td>@Service.Order.FreeDeliveryPrice</td>
-				<td><b>@Service.GetOrderCost(Service.Order)</b></td>
-				<td>@Service.Order.BLIKNumber</td>
+				<td><b>@orderService.Order.Id</b></td>
+				<td>@orderService.Order.RestaurantName</td>
+				<td><a href="@orderService.Order.MenuLink" target="_blank">@orderService.Order.MenuLink</a></td>
+				<td>@orderService.Order.MinPrice</td>
+				<td>@orderService.Order.DeliveryPrice</td>
+				<td>@orderService.Order.FreeDeliveryPrice</td>
+				<td><b>@orderService.GetOrderCost(orderService.Order)</b></td>
+				<td>@orderService.Order.BLIKNumber</td>
 			</tr>
 			<tr style="text-align:right; font-weight:bold">
-				<td colspan="6" style="background-color:white">To reach the minimum price: @(Service.GetMinimalOrderPrice(Service.Order))</td>
-				<td colspan="2" style="background-color:white">To reach the free delivery price: @(Service.GetFreeDeliveryOrderPrice(Service.Order))</td>
+				<td colspan="6" style="background-color:white">To reach the minimum price: @(orderService.GetMinimalOrderPrice(orderService.Order))</td>
+				<td colspan="2" style="background-color:white">To reach the free delivery price: @(orderService.GetFreeDeliveryOrderPrice(orderService.Order))</td>
 			</tr>
 		</tbody>
 	</table>
@@ -60,7 +60,7 @@
 		</thead>
 
 		<tbody>
-			@foreach (var dish in service.dishes)
+			@foreach (var dish in dishService.dishes)
 			{
 				<tr>
 					<td><b>@dish.Id</b></td>
@@ -110,7 +110,7 @@
 	<br />
 
 	<button disabled="@(Price >=1000)" style="display: block;margin: 0 auto;"
-			class="btn btn-success" @onclick="()=>AddNewDish(Service.Order.Id)">
+			class="btn btn-success" @onclick="()=>AddNewDish(orderService.Order.Id)">
 		Add dish
 	</button>
 
@@ -164,29 +164,29 @@
 			OpenCreateDialog();
 			return;
 		}
-		service.CreateDish(id, Description, Extras, Price, UserId);
-		service.GetDishes(id);
+		dishService.CreateDish(id, Description, Extras, Price, UserId);
+		dishService.GetDishes(id);
 		StateHasChanged();
 	}
 
 	public void DeleteDish(long id)
 	{
-		service.DeleteDish(id);
-		service.GetDishes(Service.Order.Id);
+		dishService.DeleteDish(id);
+		dishService.GetDishes(orderService.Order.Id);
 		StateHasChanged();
 	}
 
 	public void EditDish(long id)
 	{
-		service.GetDishes(Service.Order.Id);
-		service.UpdateDish(id);
+		dishService.GetDishes(orderService.Order.Id);
+		dishService.UpdateDish(id);
 		UriHelper.NavigateTo("/EditDish");
 	}
 
 	public void OpenDeleteDialog(long id)
 	{
 		DeleteDialogOpen = true;
-		service.UpdateDish(id);
+		dishService.UpdateDish(id);
 		StateHasChanged();
 	}
 
@@ -194,7 +194,7 @@
 	{
 		if (accepted)
 		{
-			DeleteDish(service.dish.Id);
+			DeleteDish(dishService.dish.Id);
 			StateHasChanged();
 		}
 

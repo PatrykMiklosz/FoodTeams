@@ -1,8 +1,8 @@
 ﻿@page "/EditDish"
 @using FoodTeams.Entities
 @using FoodTeams.Services
-@inject DishService service
-@inject OrderService Service
+@inject DishService dishService
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 
 
@@ -27,13 +27,13 @@
 
 		<tbody>
 			<tr>
-				<td><b>@Service.Order.Id</b></td>
-				<td>@Service.Order.RestaurantName</td>
-				<td><a href="@Service.Order.MenuLink" target="_blank">@Service.Order.MenuLink</a></td>
-				<td>@Service.Order.MinPrice</td>
-				<td>@Service.Order.DeliveryPrice</td>
-				<td>@Service.Order.FreeDeliveryPrice</td>
-				<td>@Service.Order.BLIKNumber</td>
+				<td><b>@orderService.Order.Id</b></td>
+				<td>@orderService.Order.RestaurantName</td>
+				<td><a href="@orderService.Order.MenuLink" target="_blank">@orderService.Order.MenuLink</a></td>
+				<td>@orderService.Order.MinPrice</td>
+				<td>@orderService.Order.DeliveryPrice</td>
+				<td>@orderService.Order.FreeDeliveryPrice</td>
+				<td>@orderService.Order.BLIKNumber</td>
 			</tr>
 		</tbody>
 	</table>
@@ -54,7 +54,7 @@
 		</thead>
 
 		<tbody>
-			@foreach(var dish in Service.Order.Dishes)
+			@foreach(var dish in orderService.Order.Dishes)
 			{
 			<tr>
 				<td><b>@dish.Id</b></td>
@@ -69,10 +69,10 @@
 
 
 <EditDishForm
-	Description="@service.dish.Description"
-	Extras="@service.dish.Extras"
-	Price="@service.dish.Price"
-	UserId="@service.dish.UserId"
+	Description="@dishService.dish.Description"
+	Extras="@dishService.dish.Extras"
+	Price="@dishService.dish.Price"
+	UserId="@dishService.dish.UserId"
 ></EditDishForm>
 
 	<br />

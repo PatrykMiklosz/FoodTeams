@@ -1,18 +1,18 @@
 ﻿@page "/EditOrder"
 @using FoodTeams.Entities
 @using FoodTeams.Services
-@inject OrderService service
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 
 <h1 class="display-3 mb-10" style=" text-align:center">Edit Order</h1>
 
 <EditOrderForm
-	RestaurantName="@service.Order.RestaurantName"
-	MenuLink="@service.Order.MenuLink"
-	MinPrice="@service.Order.MinPrice"
-	DeliveryPrice="@service.Order.DeliveryPrice"
-	FreeDeliveryPrice="@service.Order.FreeDeliveryPrice"
-	BLIKNumber="@service.Order.BLIKNumber">
+	RestaurantName="@orderService.Order.RestaurantName"
+	MenuLink="@orderService.Order.MenuLink"
+	MinPrice="@orderService.Order.MinPrice"
+	DeliveryPrice="@orderService.Order.DeliveryPrice"
+	FreeDeliveryPrice="@orderService.Order.FreeDeliveryPrice"
+	BLIKNumber="@orderService.Order.BLIKNumber">
 </EditOrderForm>
 
 

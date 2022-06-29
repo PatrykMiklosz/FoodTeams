@@ -1,6 +1,6 @@
 ﻿@page "/receipt"
 @using FoodTeams.Services
-@inject OrderService service
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 
 <h1 class="display-3 mb-10" style="text-align:center">ORDER</h1>
@@ -19,13 +19,13 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>@service.Order.Id</b></td>
-			<td>@service.Order.RestaurantName</td>
-			<td><a href="@service.Order.MenuLink" target="_blank">Click</a></td>
-			<td>@service.Order.MinPrice</td>
-			<td>@service.Order.DeliveryPrice</td>
-			<td>@service.Order.FreeDeliveryPrice</td>
-			<td>@service.Order.BLIKNumber</td>
+			<td><b>@orderService.Order.Id</b></td>
+			<td>@orderService.Order.RestaurantName</td>
+			<td><a href="@orderService.Order.MenuLink" target="_blank">Click</a></td>
+			<td>@orderService.Order.MinPrice</td>
+			<td>@orderService.Order.DeliveryPrice</td>
+			<td>@orderService.Order.FreeDeliveryPrice</td>
+			<td>@orderService.Order.BLIKNumber</td>
 		</tr>
 	</tbody>
 </table>
@@ -45,7 +45,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var dish in service.Order.Dishes)
+		@foreach (var dish in orderService.Order.Dishes)
 		{
 			<tr>
 				<td><b>@dish.Id</b></td>
@@ -58,7 +58,7 @@
 		}
 
 		<tr style="text-align:right; font-weight:bold">
-			<td colspan="6">Total price: @service.GetReceipt(service.Order)</td>
+			<td colspan="6">Total price: @orderService.GetReceipt(orderService.Order)</td>
 		</tr>
 
 	</tbody>

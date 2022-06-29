@@ -1,6 +1,6 @@
 ﻿@using FoodTeams.Entities
 @using FoodTeams.Services
-@inject OrderService service
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 
 
@@ -49,7 +49,7 @@
 	</div>
 
 	<button type="button" disabled="@(MinPrice >=1000 || DeliveryPrice >=1000 || FreeDeliveryPrice >=1000)" style="display: block; margin: 0 auto; position: center; width: 100px"
-			class="btn btn-success" @onclick="()=>UpdateOrder(service.Order)">Confirm
+			class="btn btn-success" @onclick="()=>UpdateOrder(orderService.Order)">Confirm
 	</button>
 	<br />
 	<button type="button" style="display: block; margin: 0 auto; position: center; width: 100px"
@@ -89,7 +89,7 @@
 			return;
 		}
 		GetOrder(order);
-		service.UpdateOrder(order);
+		orderService.UpdateOrder(order);
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 

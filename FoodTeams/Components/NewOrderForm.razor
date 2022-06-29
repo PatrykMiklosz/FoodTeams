@@ -1,6 +1,6 @@
 ﻿@using FoodTeams.Entities
 @using FoodTeams.Services
-@inject OrderService service
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
 
@@ -81,7 +81,7 @@
 			return;
 		}
 		GetOrder(order);
-		service.CreateOrder(order);
+		orderService.CreateOrder(order);
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 

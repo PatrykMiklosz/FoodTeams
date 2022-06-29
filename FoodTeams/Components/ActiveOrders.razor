@@ -2,8 +2,8 @@
 @using FoodTeams.Entities
 @using FoodTeams.Services
 @inject NavigationManager UriHelper
-@inject OrderService service
-@inject DishService Service
+@inject OrderService orderService
+@inject DishService dishService
 
 
 
@@ -27,7 +27,7 @@
 		</thead>
 
 		<tbody>
-			@foreach (var order in service.GetOrdersByStatus(true))
+			@foreach (var order in orderService.GetOrdersByStatus(true))
 			{
 				<tr>
 					<td><b>@order.Id</b></td>
@@ -76,24 +76,24 @@
 
 	public void EditOrder(long id)
 	{
-		service.EditOrder(id);
+		orderService.EditOrder(id);
 		UriHelper.NavigateTo("/EditOrder");
 	}
 
 	public void DeleteOrder(long id)
 	{
-		service.DeleteOrder(id);
+		orderService.DeleteOrder(id);
 		StateHasChanged();
 	}
 
 	public void CompleteOrder(long id)
 	{
-		service.CompleteOrder(id);
+		orderService.CompleteOrder(id);
 	}
 
 	void ShowDishes(long id)
 	{
-		Service.GetDishes(id);
+		dishService.GetDishes(id);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
@@ -101,7 +101,7 @@
 	{
 		if (accepted)
 		{
-			DeleteOrder(service.Order.Id);
+			DeleteOrder(orderService.Order.Id);
 			StateHasChanged();
 		}
 
@@ -112,14 +112,14 @@
 	private void OpenDeleteDialog(Order order)
 	{
 		DeleteDialogOpen = true;
-		service.Order = order;
+		orderService.Order = order;
 		StateHasChanged();
 	}
 
 	private decimal GetMinimalOrderPrice(Order order)
 	{
-		Service.GetDishes(order.Id);
-		return service.GetMinimalOrderPrice(order);
+		dishService.GetDishes(order.Id);
+		return orderService.GetMinimalOrderPrice(order);
 	}
 
 

@@ -2,8 +2,8 @@
 @using FoodTeams.Entities
 @using FoodTeams.Services
 @inject NavigationManager UriHelper
-@inject OrderService service
-@inject DishService Service
+@inject OrderService orderService
+@inject DishService dishService
 
 
 
@@ -29,7 +29,7 @@
 		</thead>
 
 		<tbody>
-			@foreach (var order in service.GetOrdersByStatus(false))
+			@foreach (var order in orderService.GetOrdersByStatus(false))
 			{
 				<tr>
 					<td><b>@order.Id</b></td>
@@ -64,14 +64,14 @@
 
 	public void Restore(long id)
 	{
-		service.RestoreOrder(id);
+		orderService.RestoreOrder(id);
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 
 	public void GetReceipt(Order order)
 	{
-		Service.GetDishes(order.Id);
-		service.GetReceipt(order);
+		dishService.GetDishes(order.Id);
+		orderService.GetReceipt(order);
 		UriHelper.NavigateTo("/receipt");
 	}
 

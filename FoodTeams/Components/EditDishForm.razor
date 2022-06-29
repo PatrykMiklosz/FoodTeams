@@ -1,6 +1,5 @@
 ﻿@using FoodTeams.Services
-@inject DishService service
-@inject OrderService Service
+@inject DishService dishService
 @inject NavigationManager UriHelper
 
 
@@ -70,7 +69,7 @@
 			StateHasChanged();
 			return;
 		}
-		service.EditDish(Description, Extras, Price, UserId);
+		dishService.EditDish(Description, Extras, Price, UserId);
 		UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
