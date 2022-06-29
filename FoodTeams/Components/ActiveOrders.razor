@@ -27,7 +27,7 @@
 		</thead>
 
 		<tbody>
-			@foreach (var order in service.Orders.Where(x => x.IsActive == true))
+			@foreach (var order in service.GetOrdersByStatus(true))
 			{
 				<tr>
 					<td><b>@order.Id</b></td>

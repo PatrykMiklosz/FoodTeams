@@ -2,6 +2,7 @@
 @using FoodTeams.Services
 @inject OrderService service
 @inject NavigationManager UriHelper
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpContextAccessor
 
 <form method="post">
 	<div class="input-group mb-3" style="width:90%; position:center; margin-right:auto; margin-left:auto">
@@ -73,6 +74,7 @@
 
 	public void CreateNewOrder(Order order)
 	{
+		var user = httpContextAccessor.HttpContext.User;
 		if (string.IsNullOrEmpty(RestaurantName))
 		{
 			OpenCreateDialog();

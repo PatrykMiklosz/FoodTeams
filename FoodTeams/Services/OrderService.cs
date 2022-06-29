@@ -5,7 +5,7 @@ namespace FoodTeams.Services
     public class OrderService
     {
         public readonly FoodTeamsDbContext dbContext;
-        public List<Order> Orders { get; set; } = new List<Order>();
+       // public List<Order> Orders { get; set; } = new List<Order>();
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
         public int ActiveOrders { get; set; }
@@ -15,14 +15,14 @@ namespace FoodTeams.Services
         public OrderService(FoodTeamsDbContext dbContext)
         {
             this.dbContext = dbContext;
-            Orders = dbContext.Orders.ToList();
+           // Orders = dbContext.Orders.ToList();
         }
 
         public void CreateOrder(Order order)
         {
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
-            Orders.Add(order);
+           // Orders.Add(order);
             NewOrderId = order.Id;
             Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }
@@ -51,7 +51,7 @@ namespace FoodTeams.Services
             var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
             dbContext.Orders.Remove(order);
             dbContext.SaveChanges();
-            Orders.Remove(order);
+           // Orders.Remove(order);
         }
 
         public void EditOrder(long id)
@@ -72,14 +72,9 @@ namespace FoodTeams.Services
             dbContext.SaveChanges();
         }
 
-        public int ActiveOrdersCount()
+        public int OrdersCount(bool status)
         {
-            return dbContext.Orders.Where(x=>x.IsActive==true).Count();
-        }
-
-        public int OrdersCount()
-        {
-            return dbContext.Orders.Where(x => x.IsActive == false).Count();
+            return dbContext.Orders.Where(x=>x.IsActive==status).Count();
         }
 
         public decimal GetReceipt(Order order)
@@ -134,9 +129,14 @@ namespace FoodTeams.Services
             return cost + order.DeliveryPrice;
         }
 
-        public void OrderDescending(List<Order> orders)
+        public IEnumerable<Order> GetOrdersByStatus(bool status)
         {
-            Orders = orders.OrderByDescending(x => x.Id).ToList();
+            return dbContext.Orders.Where(o => o.IsActive == status).OrderByDescending(o => o.CreateDate);
         }
+
+        //public void OrderDescending(List<Order> orders)
+        //{
+        //    Orders = orders.OrderByDescending(x => x.Id).ToList();
+        //}
     }
 }

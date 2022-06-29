@@ -14,6 +14,7 @@ namespace FoodTeams.Entities
         public decimal FreeDeliveryPrice { get; set; }
         public long BLIKNumber { get; set; }
 
+       // public virtual User OrderOwner { get; set; }
         public  virtual IEnumerable<Dish> Dishes { get; set; } = new List<Dish>();
     }
 }
