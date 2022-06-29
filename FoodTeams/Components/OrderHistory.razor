@@ -29,7 +29,7 @@
 		</thead>
 
 		<tbody>
-			@foreach (var order in service.Orders.Where(x => x.IsActive == false))
+			@foreach (var order in service.dbContext.Orders.Where(x => x.IsActive == false))
 			{
 				<tr>
 					<td><b>@order.Id</b></td>

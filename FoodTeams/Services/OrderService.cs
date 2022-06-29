@@ -4,7 +4,7 @@ namespace FoodTeams.Services
 {
     public class OrderService
     {
-        private readonly FoodTeamsDbContext dbContext;
+        public readonly FoodTeamsDbContext dbContext;
         public List<Order> Orders { get; set; } = new List<Order>();
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
