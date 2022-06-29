@@ -4,8 +4,10 @@ namespace FoodTeams.Entities
 {
     public class FoodTeamsDbContext : DbContext
     {
+        //private string _connectionString =
+           //"Server=.;Database=FoodTeams3Db;Trusted_Connection=True;";
         private string _connectionString =
-           "Server=.;Database=FoodTeams3Db;Trusted_Connection=True;";
+           "Server=tcp:foodteams.database.windows.net,1433;Initial Catalog=foooddb;Persist Security Info=False;User ID=admindb;Password=P@ssword123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;";
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<User> Users { get; set; }
@@ -35,6 +37,5 @@ namespace FoodTeams.Entities
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
-       // public DbSet<teamsProject.Models.OrderDto> OrderDto { get; set; }
     }
 }

@@ -138,11 +138,5 @@ namespace FoodTeams.Services
         {
             Orders = orders.OrderByDescending(x => x.Id).ToList();
         }
-
-        //public int CountOrderUsers()
-        //{
-        //    var users = 0;
-        //    Order.Dishes.
-        //}
     }
 }

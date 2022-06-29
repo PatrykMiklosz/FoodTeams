@@ -41,7 +41,7 @@ namespace FoodTeams.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(25,2)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -70,10 +70,10 @@ namespace FoodTeams.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("DeliveryPrice")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(25,2)");
 
                     b.Property<decimal>("FreeDeliveryPrice")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(25,2)");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
@@ -82,7 +82,7 @@ namespace FoodTeams.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("MinPrice")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(25,2)");
 
                     b.Property<string>("RestaurantName")
                         .IsRequired()

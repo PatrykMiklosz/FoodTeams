@@ -1,0 +1,40 @@
+{
+    "solution": {
+        "teamsAppTenantId": "953d85b3-4b6a-4612-b5c3-1b00314bab0a",
+        "subscriptionId": "63079a76-7ab5-4b5a-9a36-d2cdbad86456",
+        "subscriptionName": "Azure subscription 1",
+        "tenantId": "953d85b3-4b6a-4612-b5c3-1b00314bab0a",
+        "needCreateResourceGroup": false,
+        "resourceGroupName": "FoodTeams-dev-rg5",
+        "location": "eastus",
+        "resourceNameSuffix": "b77025",
+        "provisionSucceeded": true
+    },
+    "fx-resource-appstudio": {
+        "tenantId": "953d85b3-4b6a-4612-b5c3-1b00314bab0a",
+        "teamsAppId": "f7ee333e-dcb7-4148-9727-3e2f58bbe64e",
+        "teamsAppUpdatedAt": 1656494005291
+    },
+    "fx-resource-identity": {
+        "identityName": "foodteamsdevd80ec6",
+        "identityResourceId": "/subscriptions/63079a76-7ab5-4b5a-9a36-d2cdbad86456/resourceGroups/FoodTeams-dev-rg5/providers/Microsoft.ManagedIdentity/userAssignedIdentities/foodteamsdevd80ec6",
+        "identityClientId": "44e9e3c0-5f8e-40b9-8847-553e69664283"
+    },
+    "fx-resource-aad-app-for-teams": {
+        "clientId": "904f431c-7718-416d-82c7-3ec7ecf99cfd",
+        "clientSecret": "{{fx-resource-aad-app-for-teams.clientSecret}}",
+        "objectId": "c7df1c8a-ad58-4f3b-be9a-a18904718423",
+        "oauth2PermissionScopeId": "1a6bd0b9-34e9-4a58-b982-993138edcf20",
+        "tenantId": "953d85b3-4b6a-4612-b5c3-1b00314bab0a",
+        "oauthHost": "https://login.microsoftonline.com",
+        "oauthAuthority": "https://login.microsoftonline.com/953d85b3-4b6a-4612-b5c3-1b00314bab0a",
+        "applicationIdUris": "api://foodteamsdevd80ec6webapp.azurewebsites.net/904f431c-7718-416d-82c7-3ec7ecf99cfd"
+    },
+    "fx-resource-frontend-hosting": {
+        "domain": "foodteamsdevd80ec6webapp.azurewebsites.net",
+        "endpoint": "https://foodteamsdevd80ec6webapp.azurewebsites.net",
+        "indexPath": "",
+        "webAppResourceId": "/subscriptions/63079a76-7ab5-4b5a-9a36-d2cdbad86456/resourceGroups/FoodTeams-dev-rg5/providers/Microsoft.Web/sites/foodteamsdevd80ec6webapp"
+    },
+    "fx-resource-cicd": {}
+}
