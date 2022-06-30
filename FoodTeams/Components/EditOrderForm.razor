@@ -10,7 +10,7 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
 		</div>
-		<input placeholder="@RestaurantName" @bind="RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="RestaurantName" @bind="RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
@@ -49,9 +49,11 @@
 	</div>
 
 	<button type="button" disabled="@(MinPrice >=1000 || DeliveryPrice >=1000 || FreeDeliveryPrice >=1000)" style="display: block; margin: 0 auto; position: center; width: 100px"
-			class="btn btn-success" @onclick="()=>UpdateOrder(orderService.Order)">Confirm
+			class="btn btn-success" @onclick="()=>UpdateOrder()">Confirm
 	</button>
+
 	<br />
+
 	<button type="button" style="display: block; margin: 0 auto; position: center; width: 100px"
 			class="btn btn-warning" @onclick="()=>Cancel()">Cancel
 	</button>
@@ -81,28 +83,15 @@
 	public long BLIKNumber { get; set; }
 	public bool CreateDialogOpen { get; set; } = false;
 
-	public void UpdateOrder(Order order)
+	public void UpdateOrder()
 	{
 		if(string.IsNullOrWhiteSpace(RestaurantName))
 		{
 			OpenCreateDialog();
 			return;
 		}
-		GetOrder(order);
-		//orderService.UpdateOrder(order);
+		orderService.UpdateOrder(RestaurantName, MenuLink, MinPrice, DeliveryPrice, FreeDeliveryPrice, BLIKNumber);
 		UriHelper.NavigateTo("/ActiveOrders");
-	}
-
-	public void GetOrder(Order order)
-	{
-		order.RestaurantName = RestaurantName;
-		order.MenuLink = MenuLink;
-		order.MinPrice = MinPrice;
-		order.DeliveryPrice = DeliveryPrice;
-		order.FreeDeliveryPrice = FreeDeliveryPrice;
-		order.BLIKNumber = BLIKNumber;
-		order.CreateDate = DateTime.Now;
-		order.IsActive = true;
 	}
 
 	private void OpenCreateDialog()

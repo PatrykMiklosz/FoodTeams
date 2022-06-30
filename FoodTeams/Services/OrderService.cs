@@ -6,10 +6,6 @@ namespace FoodTeams.Services
     {
         public readonly FoodTeamsDbContext dbContext;
         public Order Order { get; set; }
-        public long NewOrderId { get; set; }
-        public int ActiveOrders { get; set; }
-        public int OrderHistory { get; set; }
-        public decimal OrderCost { get; set; }
 
         public OrderService(FoodTeamsDbContext dbContext)
         {
@@ -20,8 +16,7 @@ namespace FoodTeams.Services
         {
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
-            NewOrderId = order.Id;
-            Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
+            Order = dbContext.Orders.FirstOrDefault(x => x.Id == order.Id);
         }
 
         public void CompleteOrder(long id)
@@ -50,14 +45,14 @@ namespace FoodTeams.Services
             dbContext.SaveChanges();
         }
 
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(string restaurantName, string menuLink, decimal minPrice, decimal deliveryPrice, decimal freeDeliveryPrice, long blikNumber)
         {
-            Order.RestaurantName = order.RestaurantName;
-            Order.MenuLink = order.MenuLink;
-            Order.MinPrice = order.MinPrice;
-            Order.DeliveryPrice = order.DeliveryPrice;
-            Order.FreeDeliveryPrice = order.FreeDeliveryPrice;
-            Order.BLIKNumber = order.BLIKNumber;
+            Order.RestaurantName = restaurantName;
+            Order.MenuLink = menuLink;
+            Order.MinPrice = minPrice;
+            Order.DeliveryPrice = deliveryPrice;
+            Order.FreeDeliveryPrice = freeDeliveryPrice;
+            Order.BLIKNumber = blikNumber;
             Order.CreateDate = DateTime.Now;
             Order.IsActive = true;
             dbContext.SaveChanges();
