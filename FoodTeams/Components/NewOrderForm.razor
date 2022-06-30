@@ -9,46 +9,47 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Restaurant name</span>
 		</div>
-		<input placeholder="Restaurant Name" @bind="RestaurantName" type="text" required = "required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Restaurant Name" @bind="order.RestaurantName" type="text" required="required" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">MenuLink</span>
 		</div>
-		<input placeholder="MenuLink" @bind="MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="MenuLink" @bind="order.MenuLink" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">Minimal price</span>
 		</div>
-		<input placeholder="Minimal Price" @bind="MinPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="Minimal Price" @bind="order.MinPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">DeliveryPrice</span>
 		</div>
-		<input placeholder="DeliveryPrice" @bind="DeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="DeliveryPrice" @bind="order.DeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">FreeDeliveryPrice</span>
 		</div>
-		<input placeholder="FreeDeliveryPrice" @bind="FreeDeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="FreeDeliveryPrice" @bind="order.FreeDeliveryPrice" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
 	<div class="input-group mb-3" style="width:50%; position:center; margin-right:auto; margin-left:auto">
 		<div class="input-group-prepend">
 			<span class="input-group-text" id="inputGroup-sizing-default">BLIKNumber</span>
 		</div>
-		<input placeholder="BLIKnumber" @bind="BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+		<input placeholder="BLIKnumber" @bind="order.BLIKNumber" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
 
-	<button disabled="@(MinPrice >=1000 || DeliveryPrice >=1000 || FreeDeliveryPrice >=1000)" type="button" style="display: block;margin: 0 auto;"
-			class="btn btn-success" @onclick="()=>CreateNewOrder(neworder)">Create Order
+	<button disabled="@(order.MinPrice >=1000 || order.DeliveryPrice >=1000 || order.FreeDeliveryPrice >=1000)" type="button" style="display: block;margin: 0 auto;"
+			class="btn btn-success" @onclick="()=>CreateNewOrder(order)">
+		Create Order
 	</button>
 
 </form>
@@ -62,39 +63,21 @@
 }
 
 @code {
-	public string RestaurantName { get; set; }
-	public string MenuLink { get; set; }
-	public decimal MinPrice { get; set; }
-	public decimal DeliveryPrice { get; set; }
-	public decimal FreeDeliveryPrice { get; set; }
-	public long BLIKNumber { get; set; }
-	Order neworder = new Order();
+	Order order = new Order();
 	public bool CreateDialogOpen { get; set; } = false;
-
 
 	public void CreateNewOrder(Order order)
 	{
-		var user = httpContextAccessor.HttpContext.User;
-		if (string.IsNullOrEmpty(RestaurantName))
+		//var user = httpContextAccessor.HttpContext.User;
+		if (string.IsNullOrEmpty(order.RestaurantName))
 		{
 			OpenCreateDialog();
 			return;
 		}
-		GetOrder(order);
-		orderService.CreateOrder(order);
-		UriHelper.NavigateTo("/ActiveOrders");
-	}
-
-	public void GetOrder(Order order)
-	{
-		order.RestaurantName = RestaurantName;
-		order.MenuLink = MenuLink;
-		order.MinPrice = MinPrice;
-		order.DeliveryPrice = DeliveryPrice;
-		order.FreeDeliveryPrice = FreeDeliveryPrice;
-		order.BLIKNumber = BLIKNumber;
 		order.CreateDate = DateTime.Now;
 		order.IsActive = true;
+		orderService.CreateOrder(order);
+		UriHelper.NavigateTo("/ActiveOrders");
 	}
 
 	private void OpenCreateDialog()
@@ -109,5 +92,5 @@
 		CreateDialogOpen = false;
 		StateHasChanged();
 	}
-	
+
 }
