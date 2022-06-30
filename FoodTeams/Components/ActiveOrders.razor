@@ -38,13 +38,13 @@
 					<td>@order.FreeDeliveryPrice</td>
 					<td>@order.BLIKNumber</td>
 					<td>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>ShowDishes(order.Id)">fastfood</button>
+						<button title="Go to dishes" class="material-icons" style="border:none; font-size:32px" @onclick="()=>ShowDishes(order.Id)">fastfood</button>
 						<span></span>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>CompleteOrder(order.Id)">done</button>
+						<button title="Complete order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>CompleteOrder(order.Id)">done</button>
 						<span></span>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
+						<button title="Edit order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
 						<span></span>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
+						<button title="Delete order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(order)">delete</button>
 					</td>
 				</tr>
 			}

@@ -69,8 +69,8 @@
 					<td>@dish.Price</td>
 					<td>@dish.UserId</td>
 					<td>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditDish(dish.Id)">edit</button>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(dish.Id)">delete</button>
+						<button title="Edit dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditDish(dish.Id)">edit</button>
+						<button title="Delete dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(dish.Id)">delete</button>
 					</td>
 				</tr>
 			}

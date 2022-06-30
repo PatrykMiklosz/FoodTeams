@@ -41,8 +41,9 @@
 					<td>@order.BLIKNumber</td>
 					<td>@order.CreateDate</td>
 					<td>
-						<button class="material-icons" style="border:none; font-size:32px" disabled="@(order.CreateDate<date)" @onclick="()=>Restore(order.Id)">restore</button>
-						<button class="material-icons" style="border:none; font-size:32px" @onclick="()=>GetReceipt(order)">receipt</button>
+						<button title="Restore order" class="material-icons" style="border:none; font-size:32px" disabled="@(order.CreateDate<date)" 
+							@onclick="()=>Restore(order.Id)">restore</button>
+						<button title="Get receipt" class="material-icons" style="border:none; font-size:32px" @onclick="()=>GetReceipt(order)">receipt</button>
 					</td>
 				</tr>
 			}
