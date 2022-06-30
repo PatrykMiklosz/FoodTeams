@@ -1,5 +1,6 @@
 ﻿@page "/ActiveOrderDishes"
 @inject NavigationManager UriHelper
+@using FoodTeams.Entities
 @using FoodTeams.Services
 @using Microsoft.AspNetCore.Http.Extensions
 @inject OrderService orderService
@@ -138,11 +139,11 @@
 }
 
 @code {
-
 	public string Description { get; set; }
 	public string Extras { get; set; }
 	public decimal Price { get; set; }
-	public long UserId { get; set; }
+	public long UserId{ get; set; }
+
 	public bool DeleteDialogOpen { get; set; } = false;
 	public bool CreateDialogOpen { get; set; } = false;
 

@@ -88,11 +88,13 @@ else
 
 	void NavigateToOrderHistory()
 	{
+		StateHasChanged();
 		UriHelper.NavigateTo("/OrderHistory");
 	}
 
 	void NavigateToActiveOrders()
 	{
+		StateHasChanged();
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 }
