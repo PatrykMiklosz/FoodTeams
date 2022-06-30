@@ -5,7 +5,6 @@ namespace FoodTeams.Services
     public class OrderService
     {
         public readonly FoodTeamsDbContext dbContext;
-       // public List<Order> Orders { get; set; } = new List<Order>();
         public Order Order { get; set; }
         public long NewOrderId { get; set; }
         public int ActiveOrders { get; set; }
@@ -15,14 +14,12 @@ namespace FoodTeams.Services
         public OrderService(FoodTeamsDbContext dbContext)
         {
             this.dbContext = dbContext;
-           // Orders = dbContext.Orders.ToList();
         }
 
         public void CreateOrder(Order order)
         {
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
-           // Orders.Add(order);
             NewOrderId = order.Id;
             Order = dbContext.Orders.FirstOrDefault(x => x.Id == NewOrderId);
         }
@@ -36,7 +33,7 @@ namespace FoodTeams.Services
 
         public void GetOrder(long id)
         {
-            this.Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+           Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public void RestoreOrder(long id)
@@ -51,12 +48,6 @@ namespace FoodTeams.Services
             var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
             dbContext.Orders.Remove(order);
             dbContext.SaveChanges();
-           // Orders.Remove(order);
-        }
-
-        public void EditOrder(long id)
-        {
-            Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public void UpdateOrder(Order order)
@@ -131,12 +122,7 @@ namespace FoodTeams.Services
 
         public IEnumerable<Order> GetOrdersByStatus(bool status)
         {
-            return dbContext.Orders.Where(o => o.IsActive == status).OrderByDescending(o => o.CreateDate);
+            return dbContext.Orders.Where(o => o.IsActive == status).OrderByDescending(o => o.Id);
         }
-
-        //public void OrderDescending(List<Order> orders)
-        //{
-        //    Orders = orders.OrderByDescending(x => x.Id).ToList();
-        //}
     }
 }
