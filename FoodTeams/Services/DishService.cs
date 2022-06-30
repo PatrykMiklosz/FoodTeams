@@ -43,9 +43,7 @@ namespace FoodTeams.Services
 
         public void UpdateDish(long id)
 		{
-
-            var dish = dbContext.Dishes.Where(x => x.Id == id).FirstOrDefault();
-            this.dish = dish;
+            dish = dbContext.Dishes.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void EditDish(string description, string extras, decimal price, long userId)
