@@ -1,4 +1,4 @@
-﻿@page "/EditDish"
+﻿@page "/EditDish/{OrderId:long}/{DishId:long}"
 @using FoodTeams.Entities
 @using FoodTeams.Services
 @inject DishService dishService
@@ -27,13 +27,13 @@
 
 		<tbody>
 			<tr>
-				<td><b>@orderService.Order.Id</b></td>
-				<td>@orderService.Order.RestaurantName</td>
-				<td><a href="@orderService.Order.MenuLink" target="_blank">@orderService.Order.MenuLink</a></td>
-				<td>@orderService.Order.MinPrice</td>
-				<td>@orderService.Order.DeliveryPrice</td>
-				<td>@orderService.Order.FreeDeliveryPrice</td>
-				<td>@orderService.Order.BLIKNumber</td>
+				<td><b>@orderService.GetOrderById(OrderId).Id</b></td>
+				<td>@orderService.GetOrderById(OrderId).RestaurantName</td>
+				<td><a href="@orderService.GetOrderById(OrderId).MenuLink" target="_blank">@orderService.GetOrderById(OrderId).MenuLink</a></td>
+				<td>@orderService.GetOrderById(OrderId).MinPrice</td>
+				<td>@orderService.GetOrderById(OrderId).DeliveryPrice</td>
+				<td>@orderService.GetOrderById(OrderId).FreeDeliveryPrice</td>
+				<td>@orderService.GetOrderById(OrderId).BLIKNumber</td>
 			</tr>
 		</tbody>
 	</table>
@@ -54,7 +54,7 @@
 		</thead>
 
 		<tbody>
-			@foreach(var dish in orderService.Order.Dishes)
+			@foreach(var dish in orderService.GetOrderById(OrderId).Dishes)
 			{
 			<tr>
 				<td><b>@dish.Id</b></td>
@@ -69,10 +69,10 @@
 
 
 <EditDishForm
-	Description="@dishService.dish.Description"
-	Extras="@dishService.dish.Extras"
-	Price="@dishService.dish.Price"
-	UserId="@dishService.dish.UserId"
+	Description="@dishService.GetDishById(DishId).Description"
+	Extras="@dishService.GetDishById(DishId).Extras"
+	Price="@dishService.GetDishById(DishId).Price"
+	UserId="@dishService.GetDishById(DishId).UserId"
 ></EditDishForm>
 
 	<br />
@@ -83,6 +83,11 @@
 </body>
 
 @code {
+
+	[Parameter]
+	public long DishId{ get; set; }
+	[Parameter]
+	public long OrderId { get; set; }
 
 	public void NavigateToPrevious()
 	{

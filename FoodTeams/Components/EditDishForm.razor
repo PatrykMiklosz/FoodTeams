@@ -58,7 +58,10 @@
 	[Parameter]
 	public decimal Price { get; set; }
 	[Parameter]
+	public long DishId{ get; set; }
+	[Parameter]
 	public long UserId { get; set; }
+
 	public bool CreateDialogOpen { get; set; } = false;
 
 	public void UpdateDish()
@@ -69,8 +72,8 @@
 			StateHasChanged();
 			return;
 		}
-		dishService.EditDish(Description, Extras, Price, UserId);
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		dishService.EditDish(DishId, Description, Extras, Price, UserId);
+		//UriHelper.NavigateTo("/ActiveOrderDishes");
 	}
 
 	public void OnCreateDialogClose()

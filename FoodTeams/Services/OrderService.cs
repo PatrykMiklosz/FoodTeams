@@ -5,7 +5,6 @@ namespace FoodTeams.Services
     public class OrderService
     {
         public readonly FoodTeamsDbContext dbContext;
-        public Order Order { get; set; }
 
         public OrderService(FoodTeamsDbContext dbContext)
         {
@@ -14,47 +13,49 @@ namespace FoodTeams.Services
 
         public void CreateOrder(Order order)
         {
+            order.CreateDate = DateTime.Now;
+            order.IsActive = true;
             dbContext.Orders.Add(order);
             dbContext.SaveChanges();
-            Order = dbContext.Orders.FirstOrDefault(x => x.Id == order.Id);
         }
 
         public void CompleteOrder(long id)
 		{
-            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);  
+            var order = GetOrderById(id);  
             order.IsActive = false;
             dbContext.SaveChanges();
 		}
 
-        public void GetOrder(long id)
+        public Order GetOrderById(long id)
         {
-           Order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+           return dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public void RestoreOrder(long id)
         {
-            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+            var order = GetOrderById(id);
             order.IsActive = true;
             dbContext.SaveChanges();
         }
 
         public void DeleteOrder(long id)
         {
-            var order = dbContext.Orders.FirstOrDefault(x => x.Id == id);
+            var order = GetOrderById(id);
             dbContext.Orders.Remove(order);
             dbContext.SaveChanges();
         }
 
-        public void UpdateOrder(string restaurantName, string menuLink, decimal minPrice, decimal deliveryPrice, decimal freeDeliveryPrice, long blikNumber)
+        public void UpdateOrder(long id, string restaurantName, string menuLink, decimal minPrice, decimal deliveryPrice, decimal freeDeliveryPrice, long blikNumber)
         {
-            Order.RestaurantName = restaurantName;
-            Order.MenuLink = menuLink;
-            Order.MinPrice = minPrice;
-            Order.DeliveryPrice = deliveryPrice;
-            Order.FreeDeliveryPrice = freeDeliveryPrice;
-            Order.BLIKNumber = blikNumber;
-            Order.CreateDate = DateTime.Now;
-            Order.IsActive = true;
+            var order = GetOrderById(id);
+            order.RestaurantName = restaurantName;
+            order.MenuLink = menuLink;
+            order.MinPrice = minPrice;
+            order.DeliveryPrice = deliveryPrice;
+            order.FreeDeliveryPrice = freeDeliveryPrice;
+            order.BLIKNumber = blikNumber;
+            order.CreateDate = DateTime.Now;
+            order.IsActive = true;
             dbContext.SaveChanges();
         }
 
@@ -66,7 +67,7 @@ namespace FoodTeams.Services
         public decimal GetReceipt(Order order)
         {
             decimal receipt = 0;
-            foreach(var dish in Order.Dishes)
+            foreach(var dish in order.Dishes)
             {
                 receipt += dish.Price;
             }

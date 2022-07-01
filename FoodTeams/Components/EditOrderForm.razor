@@ -70,6 +70,8 @@
 @code {
 
 	[Parameter]
+	public long OrderId { get; set; }
+	[Parameter]
 	public string RestaurantName { get; set; }
 	[Parameter]
 	public string MenuLink { get; set; }
@@ -81,6 +83,7 @@
 	public decimal FreeDeliveryPrice { get; set; }
 	[Parameter]
 	public long BLIKNumber { get; set; }
+
 	public bool CreateDialogOpen { get; set; } = false;
 
 	public void UpdateOrder()
@@ -90,7 +93,7 @@
 			OpenCreateDialog();
 			return;
 		}
-		orderService.UpdateOrder(RestaurantName, MenuLink, MinPrice, DeliveryPrice, FreeDeliveryPrice, BLIKNumber);
+		orderService.UpdateOrder(OrderId, RestaurantName, MenuLink, MinPrice, DeliveryPrice, FreeDeliveryPrice, BLIKNumber);
 		UriHelper.NavigateTo("/ActiveOrders");
 	}
 

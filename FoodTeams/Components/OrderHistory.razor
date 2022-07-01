@@ -71,9 +71,8 @@
 
 	public void GetReceipt(Order order)
 	{
-		dishService.GetDishes(order.Id);
-		orderService.GetReceipt(order);
-		UriHelper.NavigateTo("/receipt");
+		//dishService.GetOrderDishes(order.Id);
+		UriHelper.NavigateTo("/receipt/" + order.Id);
 	}
 
 

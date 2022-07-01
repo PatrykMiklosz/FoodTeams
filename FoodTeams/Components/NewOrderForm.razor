@@ -75,8 +75,6 @@
 			OpenCreateDialog();
 			return;
 		}
-		order.CreateDate = DateTime.Now;
-		order.IsActive = true;
 		orderService.CreateOrder(order);
 		UriHelper.NavigateTo("/ActiveOrders");
 	}

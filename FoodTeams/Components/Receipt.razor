@@ -1,4 +1,4 @@
-﻿@page "/receipt"
+﻿@page "/receipt/{id:long}"
 @using FoodTeams.Services
 @inject OrderService orderService
 @inject NavigationManager UriHelper
@@ -19,13 +19,13 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><b>@orderService.Order.Id</b></td>
-			<td>@orderService.Order.RestaurantName</td>
-			<td><a href="@orderService.Order.MenuLink" target="_blank">Click</a></td>
-			<td>@orderService.Order.MinPrice</td>
-			<td>@orderService.Order.DeliveryPrice</td>
-			<td>@orderService.Order.FreeDeliveryPrice</td>
-			<td>@orderService.Order.BLIKNumber</td>
+			<td><b>@orderService.GetOrderById(Id).Id</b></td>
+			<td>@orderService.GetOrderById(Id).RestaurantName</td>
+			<td><a href="@orderService.GetOrderById(Id).MenuLink" target="_blank">Click</a></td>
+			<td>@orderService.GetOrderById(Id).MinPrice</td>
+			<td>@orderService.GetOrderById(Id).DeliveryPrice</td>
+			<td>@orderService.GetOrderById(Id).FreeDeliveryPrice</td>
+			<td>@orderService.GetOrderById(Id).BLIKNumber</td>
 		</tr>
 	</tbody>
 </table>
@@ -45,7 +45,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var dish in orderService.Order.Dishes)
+		@foreach (var dish in orderService.GetOrderById(Id).Dishes)
 		{
 			<tr>
 				<td><b>@dish.Id</b></td>
@@ -58,7 +58,7 @@
 		}
 
 		<tr style="text-align:right; font-weight:bold">
-			<td colspan="6">Total price: @orderService.GetReceipt(orderService.Order)</td>
+			<td colspan="6">Total price: @orderService.GetReceipt(orderService.GetOrderById(Id))</td>
 		</tr>
 
 	</tbody>
@@ -69,6 +69,8 @@
 <button style="position: fixed; top: 10px; left: 60px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToMainMenu">home</button>
 @code {
 
+	[Parameter]
+	public long Id{ get; set; }
 	public void NavigateToMainMenu()
 	{
 		UriHelper.NavigateTo("/Welcome");
