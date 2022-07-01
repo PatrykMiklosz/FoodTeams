@@ -1,4 +1,4 @@
-﻿@page "/EditDish/{OrderId:long}/{DishId:long}"
+﻿@page "/EditDish/{dishId:long}"
 @using FoodTeams.Entities
 @using FoodTeams.Services
 @inject DishService dishService
@@ -27,13 +27,13 @@
 
 		<tbody>
 			<tr>
-				<td><b>@orderService.GetOrderById(OrderId).Id</b></td>
-				<td>@orderService.GetOrderById(OrderId).RestaurantName</td>
-				<td><a href="@orderService.GetOrderById(OrderId).MenuLink" target="_blank">@orderService.GetOrderById(OrderId).MenuLink</a></td>
-				<td>@orderService.GetOrderById(OrderId).MinPrice</td>
-				<td>@orderService.GetOrderById(OrderId).DeliveryPrice</td>
-				<td>@orderService.GetOrderById(OrderId).FreeDeliveryPrice</td>
-				<td>@orderService.GetOrderById(OrderId).BLIKNumber</td>
+				<td><b>@orderService.GetOrderByDishId(DishId).Id</b></td>
+				<td>@orderService.GetOrderByDishId(DishId).RestaurantName</td>
+				<td><a href="@orderService.GetOrderByDishId(DishId).MenuLink" target="_blank">@orderService.GetOrderByDishId(DishId).MenuLink</a></td>
+				<td>@orderService.GetOrderByDishId(DishId).MinPrice</td>
+				<td>@orderService.GetOrderByDishId(DishId).DeliveryPrice</td>
+				<td>@orderService.GetOrderByDishId(DishId).FreeDeliveryPrice</td>
+				<td>@orderService.GetOrderByDishId(DishId).BLIKNumber</td>
 			</tr>
 		</tbody>
 	</table>
@@ -54,7 +54,7 @@
 		</thead>
 
 		<tbody>
-			@foreach(var dish in orderService.GetOrderById(OrderId).Dishes)
+			@foreach(var dish in orderService.GetOrderByDishId(DishId).Dishes)
 			{
 			<tr>
 				<td><b>@dish.Id</b></td>
@@ -73,6 +73,7 @@
 	Extras="@dishService.GetDishById(DishId).Extras"
 	Price="@dishService.GetDishById(DishId).Price"
 	UserId="@dishService.GetDishById(DishId).UserId"
+	DishId="DishId"
 ></EditDishForm>
 
 	<br />
@@ -86,8 +87,6 @@
 
 	[Parameter]
 	public long DishId{ get; set; }
-	[Parameter]
-	public long OrderId { get; set; }
 
 	public void NavigateToPrevious()
 	{

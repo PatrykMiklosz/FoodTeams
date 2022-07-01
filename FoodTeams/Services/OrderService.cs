@@ -31,6 +31,13 @@ namespace FoodTeams.Services
            return dbContext.Orders.FirstOrDefault(x => x.Id == id);
         }
 
+        public Order GetOrderByDishId(long id)
+		{
+            var dish = dbContext.Dishes.FirstOrDefault(d => d.Id == id);
+            var order = dbContext.Orders.Where(o => o.Dishes.Contains(dish)).FirstOrDefault();
+            return order;
+		}
+
         public void RestoreOrder(long id)
         {
             var order = GetOrderById(id);

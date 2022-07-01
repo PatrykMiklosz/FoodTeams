@@ -1,5 +1,6 @@
 ﻿@using FoodTeams.Services
 @inject DishService dishService
+@inject OrderService orderService
 @inject NavigationManager UriHelper
 
 
@@ -73,7 +74,7 @@
 			return;
 		}
 		dishService.EditDish(DishId, Description, Extras, Price, UserId);
-		//UriHelper.NavigateTo("/ActiveOrderDishes");
+		UriHelper.NavigateTo("/ActiveOrderDishes/" + orderService.GetOrderByDishId(DishId).Id);
 	}
 
 	public void OnCreateDialogClose()

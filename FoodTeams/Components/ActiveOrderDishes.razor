@@ -70,7 +70,7 @@
 					<td>@dish.Price</td>
 					<td>@dish.UserId</td>
 					<td>
-						<button title="Edit dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditDish(Id, dish.Id)">edit</button>
+						<button title="Edit dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditDish(dish.Id)">edit</button>
 						<button title="Delete dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(dish.Id)">delete</button>
 					</td>
 				</tr>
@@ -174,9 +174,9 @@
 		StateHasChanged();
 	}
 
-	public void EditDish(long orderId, long dishId)
+	public void EditDish(long dishId)
 	{
-		UriHelper.NavigateTo("/EditDish/" + orderId + dishId);
+		UriHelper.NavigateTo("/EditDish/" + dishId);
 	}
 
 	public void OpenDeleteDialog(long id)
