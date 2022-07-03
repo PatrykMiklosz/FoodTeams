@@ -1,6 +1,7 @@
 ﻿@page "/receipt/{id:long}"
 @using FoodTeams.Services
 @inject OrderService orderService
+@inject UserService userService
 @inject NavigationManager UriHelper
 
 <h1 class="display-3 mb-10" style="text-align:center">ORDER</h1>
@@ -41,7 +42,7 @@
 			<th>Extras</th>
 			<th>Price</th>
 			<th>Delivery price</th>
-			<th>User id</th>
+			<th>User email</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -53,7 +54,7 @@
 				<td>@dish.Extras</td>
 				<td>@dish.Price</td>
 				<td></td>
-				<td>@dish.UserId</td>
+				<td>@userService.GetUserEmailByUserId(dish.UserId)</td>
 			</tr>
 		}
 

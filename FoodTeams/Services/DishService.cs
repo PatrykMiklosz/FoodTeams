@@ -1,18 +1,14 @@
 ﻿using FoodTeams.Entities;
-using FoodTeams.Services;
 
 namespace FoodTeams.Services
 {
     public class DishService
     {
         private readonly FoodTeamsDbContext dbContext;
-        private readonly OrderService orderService;
-        public Dish dish = new Dish();
 
-        public DishService(FoodTeamsDbContext dbContext, OrderService orderService)
+        public DishService(FoodTeamsDbContext dbContext)
         {
             this.dbContext = dbContext;
-            this.orderService = orderService;
         }
 
         public Dish GetDishById(long id)

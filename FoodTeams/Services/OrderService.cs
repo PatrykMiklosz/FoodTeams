@@ -1,4 +1,5 @@
 ﻿using FoodTeams.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodTeams.Services
 {
@@ -28,7 +29,7 @@ namespace FoodTeams.Services
 
         public Order GetOrderById(long id)
         {
-           return dbContext.Orders.FirstOrDefault(x => x.Id == id);
+           return dbContext.Orders.Include(o => o.Dishes).FirstOrDefault(o => o.Id == id);
         }
 
         public Order GetOrderByDishId(long id)
