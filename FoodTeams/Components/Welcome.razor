@@ -89,6 +89,7 @@ else
 	void NavigateToOrderHistory()
 	{
 		StateHasChanged();
+		var user = teamsUserCredential.GetUserInfoAsync().GetAwaiter().GetResult();
 		UriHelper.NavigateTo("/OrderHistory");
 	}
 

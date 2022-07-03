@@ -5,7 +5,8 @@
 @using Microsoft.AspNetCore.Http.Extensions
 @inject OrderService orderService
 @inject DishService dishService
-
+@inject TeamsUserCredential teamsUserCredential
+@inject UserService userService
 
 
 <body>
@@ -170,7 +171,9 @@
 			OpenCreateDialog();
 			return;
 		}
-		dishService.CreateDish(id, Description, Extras, Price, UserId);
+		var user = teamsUserCredential.GetUserInfoAsync().GetAwaiter().GetResult();
+		var dbUser = userService.GetUserByEmail(user.PreferredUserName);
+		dishService.CreateDish(id, Description, Extras, Price, dbUser.Id);
 		StateHasChanged();
 	}
 

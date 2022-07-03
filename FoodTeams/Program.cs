@@ -16,7 +16,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<FoodTeamsDbContext>();
 builder.Services.AddScoped<OrderService>();
 builder.Services.AddScoped<DishService>();
-
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

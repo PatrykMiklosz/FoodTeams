@@ -42,10 +42,11 @@ namespace FoodTeams.Services
 
         public void EditDish(long dishId, string description, string extras, decimal price, long userId)
         {
-            GetDishById(dishId).Description=description;
-            GetDishById(dishId).Extras = extras;
-            GetDishById(dishId).Price = price;
-            GetDishById(dishId).UserId = userId;
+            var dish = GetDishById(dishId);
+            dish.Description=description;
+            dish.Extras = extras;
+            dish.Price = price;
+            dish.UserId = userId;
             dbContext.SaveChanges();
         }
 
