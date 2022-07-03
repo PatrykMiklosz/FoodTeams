@@ -1,4 +1,5 @@
 ﻿using FoodTeams.Entities;
+using System.Linq;
 
 namespace FoodTeams.Services
 
@@ -16,6 +17,12 @@ namespace FoodTeams.Services
 		{
 			var user = dbContext.Users.Where(u=>u.Email==email).FirstOrDefault();
 			return user;
+		}
+
+		public string GetUserEmailByUserId(long id)
+		{
+			var user = dbContext.Users.FirstOrDefault(u => u.Id == id);
+			return user.Email;
 		}
     }
 }

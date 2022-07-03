@@ -69,7 +69,7 @@
 					<td>@dish.Description</td>
 					<td>@dish.Extras</td>
 					<td>@dish.Price</td>
-					<td>@dish.UserId</td>
+					<td>@userService.GetUserEmailByUserId(dish.UserId)</td>
 					<td>
 						<button title="Edit dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditDish(dish.Id)">edit</button>
 						<button title="Delete dish" class="material-icons" style="border:none; font-size:32px" @onclick="()=>OpenDeleteDialog(dish.Id)">delete</button>
@@ -100,14 +100,6 @@
 		</div>
 		<input placeholder="Price" @bind="Price" type="number" min="0" max="1000" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 	</div>
-
-	<div class="input-group mb-3" style="width:70%; position:center; margin-right:auto; margin-left:auto">
-		<div class="input-group-prepend">
-			<span class="input-group-text" id="inputGroup-sizing-default">User Id</span>
-		</div>
-		<input placeholder="User Id" @bind="UserId" type="number" min="0" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-	</div>
-
 
 	<br />
 

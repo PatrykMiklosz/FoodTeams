@@ -53,7 +53,7 @@ namespace FoodTeams.Services
         public IEnumerable<Dish> GetOrderDishes(long id)
         {
             var order = dbContext.Orders.FirstOrDefault(o => o.Id == id);
-            return dbContext.Dishes.Where(d => d.OrderId == id);
+            return dbContext.Dishes.Where(d => d.OrderId == id).ToList();
         }
     }
 }
