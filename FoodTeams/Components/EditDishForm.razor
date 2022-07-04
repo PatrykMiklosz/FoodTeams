@@ -74,6 +74,7 @@
 			return;
 		}
 		dishService.EditDish(DishId, Description, Extras, Price, UserId);
+		StateHasChanged();
 		UriHelper.NavigateTo("/ActiveOrderDishes/" + orderService.GetOrderByDishId(DishId).Id);
 	}
 
@@ -85,6 +86,6 @@
 
 	public void Cancel()
 	{
-		UriHelper.NavigateTo("/ActiveOrderDishes");
+		UriHelper.NavigateTo("/ActiveOrderDishes/" + orderService.GetOrderByDishId(DishId).Id);
 	}
 }

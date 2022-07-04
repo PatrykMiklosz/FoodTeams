@@ -1,7 +1,9 @@
 ﻿@page "/receipt/{id:long}"
+@using FoodTeams.Entities
 @using FoodTeams.Services
 @inject OrderService orderService
 @inject UserService userService
+@inject DishService dishService
 @inject NavigationManager UriHelper
 
 <h1 class="display-3 mb-10" style="text-align:center">ORDER</h1>
@@ -53,7 +55,7 @@
 				<td>@dish.Description</td>
 				<td>@dish.Extras</td>
 				<td>@dish.Price</td>
-				<td></td>
+				<td>@GetUserDeliveryPrice()</td>
 				<td>@userService.GetUserEmailByUserId(dish.UserId)</td>
 			</tr>
 		}
@@ -70,15 +72,35 @@
 <button style="position: fixed; top: 10px; left: 60px; border:none; font-size:32px" class="material-icons" @onclick="NavigateToMainMenu">home</button>
 @code {
 
-	[Parameter]
-	public long Id{ get; set; }
-	public void NavigateToMainMenu()
-	{
-		UriHelper.NavigateTo("/Welcome");
-	}
+		[Parameter]
+		public long Id{ get; set; }
 
-	public void NavigateToPrevious()
-	{
-		UriHelper.NavigateTo("/OrderHistory");
-	}
+		public decimal GetUserDeliveryPrice()
+		{
+			if (orderService.GetFreeDeliveryOrderPrice(orderService.GetOrderById(Id)) == 0)
+			{
+				return 0;
+			}
+			else
+			{
+				var dishes = dishService.GetOrderDishes(Id);
+				var users = new List<string>();
+				foreach(var dish in dishes)
+				{
+					users.Add(userService.GetUserEmailByUserId(dish.UserId));
+				}
+				return (orderService.GetOrderById(Id).DeliveryPrice) / users.Distinct().Count();
+			}
+		}
+
+
+		public void NavigateToMainMenu()
+		{
+			UriHelper.NavigateTo("/Welcome");
+		}
+
+		public void NavigateToPrevious()
+		{
+			UriHelper.NavigateTo("/OrderHistory");
+		}
 }

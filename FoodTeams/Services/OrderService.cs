@@ -79,6 +79,11 @@ namespace FoodTeams.Services
             {
                 receipt += dish.Price;
             }
+            if (GetFreeDeliveryOrderPrice(order) == 0)
+            {
+                return receipt;
+            }
+            else receipt += order.DeliveryPrice;
             return receipt;
         }
 

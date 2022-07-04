@@ -40,7 +40,7 @@
 					<td>
 						<button title="Go to dishes" class="material-icons" style="border:none; font-size:32px" @onclick="()=>ShowDishes(order.Id)">fastfood</button>
 						<span></span>
-						<button title="Complete order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>orderService.CompleteOrder(order.Id)">done</button>
+						<button title="Complete order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>CompleteOrder(order.Id)">done</button>
 						<span></span>
 						<button title="Edit order" class="material-icons" style="border:none; font-size:32px" @onclick="()=>EditOrder(order.Id)">edit</button>
 						<span></span>
@@ -72,11 +72,13 @@
 
 	public void NavigateToPrevious()
 	{
+		StateHasChanged();
 		UriHelper.NavigateTo("/Welcome");
 	}
 
 	public void EditOrder(long id)
 	{
+		StateHasChanged();
 		UriHelper.NavigateTo("/EditOrder/" + id);
 	}
 
@@ -107,6 +109,12 @@
 	{
 		OrderId = order.Id;
 		DeleteDialogOpen = true;
+		StateHasChanged();
+	}
+
+	public void CompleteOrder(long id)
+	{
+		orderService.CompleteOrder(id);
 		StateHasChanged();
 	}
 }
